@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <title>Casting SPELs with Clojure: Syntax and Semantics</title> 
+  </head> 
+  <body> 
+    <div class="main"> 
+      <div class="top"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="casting.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager current">2</span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="data.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Syntax and Semantics</span> 
+      </div> 
+      <div class="heading">Syntax and Semantics</div> 
+      <div class="textblock"> 
+        <p> 
+          Every computer language has code that is made up of <i>syntax</i> 
+          and <i>semantics</i>. The <i>syntax</i> of a programming language
+          is the basic skeleton your program has to follow so that the
+          compiler knows <i>what's what</i> in your program, so it can tell
+          what's a function, a variable, etc. The <i>semantics</i> of a
+          program is the more "random" stuff, like the different commands you
+          have available and what variables you're allowed to look at at any
+          point in the program. The first thing that is special about Lisp
+          is that it has the simplest syntax of any major programming
+          language.
+        </p> 
+        <p> 
+          Basically, the Lisp syntax dictates that any text you give the Lisp
+          compiler has to be arranged into lists, which can be nested into
+          lists of lists or such as needed. The parenthesis mark the
+          beginning and end of each list:
+        </p> 
+      </div> 
+      <img src="images/list.jpg" alt="Lisp List"> 
+      <div class="textblock"> 
+        <p> 
+          Additionally, the Lisp compiler uses two modes when it reads your
+          code: A <b>Code Mode</b> and a <b>Data Mode</b>. When you're in
+          <b>Data Mode</b>, you can put anything you want into your lists.
+          However, the compiler first starts off reading your code in
+          <b>Code Mode</b> - In <b>Code Mode</b>, your lists need to be a
+          special type of list called a <b>form</b>:
+        </p> 
+      </div> 
+      <img src="images/frame.jpg" alt="Lisp Form"> 
+      <div class="textblock"> 
+        <p> 
+        A form is a list where the first symbol in the list has to be a
+        special word that the compiler can understand - usually the name
+        of a function. In this case, the compiler will send the other items
+        of the list to the function as parameters. When it reads the text
+        for these parameters, it will usually assume that they are
+        <i>also</i> in <b>Code Mode</b>, unless you tell it to flip into
+        <b>Data Mode</b>.
+        </p> 
+      </div> 
+      <hr> 
+      <div class="bottom"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="casting.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager current">2</span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="data.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Syntax and Semantics</span> 
+        </div> 
+    </div> 
+  </body> 
+</html>

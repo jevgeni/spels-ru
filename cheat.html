@@ -1,0 +1,101 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
+    <script type="text/javascript" src="js/prettify.js"></script> 
+    <script type="text/javascript" src="js/lang-clojure.js"></script> 
+    <title>Casting SPELs with Clojure: Walkthrough</title> 
+  </head> 
+  <body onLoad="prettyPrint()"> 
+  <div class="main"> 
+    <div class="heading">Walkthrough</div> 
+    <div class="textblock"> 
+    <pre class="prettyprint lang-java"> 
+(YOU ARE IN THE LIVING-ROOM OF A WIZARD'S HOUSE. THERE IS A WIZARD SNORING
+ LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A STAIRWAY
+ GOING UPSTAIRS FROM HERE. YOU SEE A BUCKET ON THE FLOOR.)
+ 
+&gt; (pickup bucket)
+ 
+(YOU ARE NOW CARRYING THE BUCKET)
+ 
+&gt; (inventory)
+ 
+(WHISKEY-BOTTLE BUCKET)
+ 
+&gt; (walk upstairs)
+ 
+(YOU ARE IN THE ATTIC OF THE ABANDONED HOUSE. THERE IS A GIANT WELDING TORCH IN
+ THE CORNER. THERE IS A STAIRWAY GOING DOWNSTAIRS FROM HERE.)
+ 
+&gt; (walk east)
+ 
+(YOU CANT GO THAT WAY.)
+ 
+&gt; (walk downstairs)
+ 
+(YOU ARE IN THE LIVING-ROOM OF A WIZARD'S HOUSE. THERE IS A WIZARD SNORING
+ LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A STAIRWAY
+ GOING UPSTAIRS FROM HERE.)
+ 
+&gt; (walk west)
+ 
+(YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU. THERE IS A
+ DOOR GOING EAST FROM HERE. YOU SEE A FROG ON THE FLOOR. YOU SEE A CHAIN ON THE
+ FLOOR.)
+ 
+&gt; (dunk bucket well)
+ 
+(THE WATER LEVEL IS TOO LOW TO REACH.)
+ 
+&gt; (pickup chain)
+ 
+(YOU ARE NOW CARRYING THE CHAIN)
+ 
+&gt; (walk east)
+ 
+(YOU ARE IN THE LIVING-ROOM OF A WIZARDS HOUSE. THERE IS A WIZARD SNORING
+ LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A STAIRWAY
+ GOING UPSTAIRS FROM HERE.)
+ 
+&gt; (splash bucket wizard)
+ 
+(THE BUCKET HAS NOTHING IN IT.)
+ 
+&gt; (walk upstairs)
+ 
+(YOU ARE IN THE ATTIC OF THE WIZARDS HOUSE. THERE IS A GIANT WELDING TORCH IN
+ THE CORNER. THERE IS A STAIRWAY GOING DOWNSTAIRS FROM HERE.)
+ 
+&gt; (weld chain bucket)
+ 
+(THE CHAIN IS NOW SECURELY WELDED TO THE BUCKET.)
+ 
+&gt; (walk downstairs)
+ 
+(YOU ARE IN THE LIVING-ROOM OF A WIZARD'S HOUSE. THERE IS A WIZARD SNORING
+ LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A STAIRWAY
+ GOING UPSTAIRS FROM HERE.)
+ 
+&gt; (walk west)
+ 
+(YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU. THERE IS A
+ DOOR GOING EAST FROM HERE. YOU SEE A FROG ON THE FLOOR.)
+ 
+&gt; (dunk bucket well)
+ 
+(THE BUCKET IS NOW FULL OF WATER)
+ 
+&gt; (walk east)
+ 
+(YOU ARE IN THE LIVING-ROOM OF A WIZARD'S HOUSE. THERE IS A WIZARD SNORING
+ LOUDLY ON THE COUCH. THERE IS A DOOR GOING WEST FROM HERE. THERE IS A STAIRWAY
+ GOING UPSTAIRS FROM HERE.)
+ 
+&gt; (splash bucket wizard)
+ 
+(THE WIZARD AWAKENS FROM HIS SLUMBER AND GREETS YOU WARMLY. HE HANDS YOU THE
+ MAGIC LOW-CARB DONUT- YOU WIN! THE END.)
+</pre></div></div> 
+</body></html> 

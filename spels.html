@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
+    <script type="text/javascript" src="js/prettify.js"></script> 
+    <script type="text/javascript" src="js/lang-clojure.js"></script> 
+    <title>Casting SPELs with Clojure: Casting SPELs</title> 
+  </head> 
+  <body onLoad="prettyPrint()"> 
+    <div class="main"> 
+      <div class="top"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="walking.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager current">6</span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="actions.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Casting SPELs</span> 
+      </div> 
+      <div class="heading">Casting SPELs</div> 
+      <div class="textblock"> 
+        <p> 
+        Now we're going to learn an incredibly powerful feature of
+        Lisp: Creating SPELs!
+        </p> 
+        <p> 
+        SPEL is short for "Semantic Program Enhancement Logic" and lets
+        us create new behavior inside the world of our computer code
+        that changes the Lisp language at a fundamental level in order
+        to customize its behavior for our needs- It's the part of Lisp
+        that looks most like magic. To enable SPELs, we first need to
+        activate SPELs inside our Lisp compiler (Don't worry about what
+        this line does - Advanced Lispers should click
+        <a href="no_macros.html">here.</a>)
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defmacro defspel [& rest] `(defmacro ~@rest))</pre> 
+        <p> 
+        Ok, now that they're enabled, let's cast our first spell,
+        called <code>walk</code>:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defspel walk [direction] `(walk-direction '~direction))</pre> 
+        <p> 
+        What this code does is it tells the Lisp compiler that the
+        word <code>walk</code> is not actually the word
+        <code>walk</code> but the word <code>walk-direction</code> 
+        and that the word <code>direction</code> actually has a
+        quote in front of it, even though we can't see it. Basically
+        we can sneak in some special code inbetween our program and
+        the compiler that changes our code into something else before
+        it is compiled:
+        </p> 
+      </div> 
+      <img src="images/spel_compile.jpg" alt="Compiling a SPEL"> 
+      <div class="textblock"> 
+        <p> 
+         Notice how similar this function looks to the code we had
+        written before for describe-path: In Lisp, not only do code
+        and data look a lot identical, but code and special commands
+        to the compiler (the SPELs) look identical as well - A very
+        consistent and clean design! Let's try our new spell:
+        </p> 
+        <pre class="prettyprint lang-clojure">(walk east)</pre> 
+        <pre class="console"> 
+user=> (walk east)                                             
+(you are in the living room of a wizards house -
+there is a wizard snoring loudly on the couch -
+there is a door going west from here -
+there is a stairway going upstairs from here -
+you see a whiskey-bottle on the floor -
+you see a bucket on the floor -)
+        </pre> 
+        <p>much better!</p> 
+        <p> 
+        Now we'll create a command to pickup objects in our world:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defn pickup-object [object]
+  (cond (is-at? object location object-locations)
+        (do
+          (def object-locations (assoc object-locations object 'body))
+          `(you are now carrying the ~object))
+        :else '(you cannot get that.)))
+        </pre> 
+        <p> 
+        This function checks to see if the object is indeed on the
+        floor of the current location - If it is, it <i>pushes</i> 
+        the new location (the player's body) onto the list
+        (<i>pushing</i> means to add a new item to the list, in a
+        way that the <i>assoc</i> command sees and therefore hides
+        the previous location) and returns a sentence letting us
+        know wether it succeeded.
+        </p> 
+        <p> 
+        Now let's cast another SPEL to make the command easier to use:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defspel pickup [object] `(spel-print (pickup-object '~object)))</pre> 
+        <p> 
+        Now let's try our new SPEL:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(pickup whiskey-bottle)</pre> 
+      </div> 
+      <div class="textblock"> 
+        <pre class="console"> 
+user=> (pickup whiskey-bottle)
+(you are now carrying the whiskey-bottle)</pre> 
+        <p> 
+        Now let's add a couple more useful commands - First, a
+        command that lets us see our current inventory of items
+        we're carrying:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defn inventory []
+  (filter (fn [x] (is-at? x 'body object-locations)) objects))
+        </pre> 
+        <p> 
+        Now a function that tells us if he have a certain object on us:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defn have? [object]
+   (some #{object} (inventory)))
+        </pre> 
+      </div> 
+      <hr> 
+      <div class="bottom"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="walking.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager current">6</span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="actions.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Casting SPELs</span> 
+      </div> 
+    </div> 
+  </body> 
+</html> 

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+  <head> 
+    <title> 
+      Casting SPELs with Clojure: Addendum
+    </title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
+    <script type="text/javascript" src="js/prettify.js"></script> 
+    <script type="text/javascript" src="js/lang-clojure.js"></script> 
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script> 
+    <script> 
+    $(document).ready(function() {
+        prettyPrint();
+      });
+    </script> 
+  </head> 
+  <body> 
+    <div class="main"> 
+      <div class="top"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager current">8</span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="no_macros.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Addendum</span> 
+      </div> 
+      <div class="heading">Addendum</div> 
+      <div class="textblock"> 
+        <p> 
+        Ok, now lets talk about some issues that were glossed over
+        in this tutorial...
+        </p> 
+        <p>First of all, Clojure Lisp has a very well thought out system for defining variables and changing their value. In this tutorial, we use the <i>def</i> command exclusively to set and change the values of global variables to keep track of the state of our game world. You would almost never do this in a "real" Clojure program. Instead, you would want to read up on <a href="http://clojure.org/refs">Refs</a>, <a href="http://clojure.org/atoms">Atoms</a>, and <a href="http://clojure.org/agents">Agents</a>, which offer a much cleaner and thread-safe way of managing data in a Clojure program.
+        <p> 
+        Another major <i>cheat</i> that we made in this tutorial is
+        that we wrote our game sentences using symbols
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+'(this is not how Lispers usually write text)
+"Lispers write text using double quotes"</pre> 
+        <p> 
+        Symbols have a special meaning in Clojure (and other Lisps) and are used to
+        store unique names of functions, variables, and other
+        things. Because of this, Lisp treats symbols in special
+        ways that are awkward for text messages. Using strings instead of symbols allows
+        text we work with to not be affected by any such quirks,
+        but requires more esoteric commands for manipulating text.
+        Also, working with strings is not so relevant to teaching
+        the far more important symbol manipulation commands in Lisp.
+        </p> 
+     </div> 
+     <div class="textblock"> 
+       <p> 
+       Another glossed over issue is that SPELs are more commonly
+       referred to as "Lisp true macros" and are created with the
+       <code>defmacro</code> command, which is very confusing for
+       teaching purposes. Read the
+       <a href="no_macros.html">following short essay</a> as to
+       why I think this name distinction is beneficial.
+       And finally, there are ugly name collisions that can happen
+       when a SPEL is written in the style of the
+       <code>game-action</code> SPEL. If you read more advanced
+       lisp materials this will be explained in greater detail.
+       </p> 
+       <p> 
+       <b>Q.</b> What should I read next to expand my knowledge of Lisp?
+       </p> 
+       <p> 
+       <b>A.</b> There are many great (and some downloadable) Lisp books
+       available at
+       <a href="http://www.cliki.net/Lisp%20books">the cliki website</a>.
+       </p> 
+       <p> 
+       If you're interested in the most intense theoretical text, I
+       would recommend the free ebook version of
+       <a href="http://www.paulgraham.com/onlisp.html">On Lisp</a> 
+       by Paul Graham. The other books he has written and the essays
+       on his website are also fantastic.
+       </p> 
+       <p> 
+       If you're interested in a more pragmatic tack, many Lispers
+       are excited about the book "Practical Common Lisp" by Peter
+       Seibel. His book is also available
+       <a href="http://www.gigamonkeys.com/book/">on-line</a>.
+       </p> 
+     </div> 
+     <hr> 
+     <div class="bottom"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager current">8</span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="no_macros.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Addendum</span> 
+     </div> 
+ 
+   </div> 
+  </body> 
+</html> 

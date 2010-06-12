@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"> 
+    <link href="css/style.css" type="text/css" rel="stylesheet"> 
+    <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
+    <script type="text/javascript" src="js/prettify.js"></script> 
+    <script type="text/javascript" src="js/lang-clojure.js"></script> 
+    <title>Casting SPELs with Clojure - Home -</title> 
+    <style type="text/css"> 
+    .linkcell {
+       background-color: #eeffee;
+       text-align: center;
+       padding: 5px;
+       border: 1px dashed #888888;
+    }
+    </style> 
+  </head> 
+  <body onLoad="prettyPrint()"> 
+   <div class="main"> 
+    <div class="top"> 
+    <!--
+      <span class="pager"><a href="casting.html">&lt;&lt; first</a></span>
+      <span class="pager"><a href="casting.html">&lt; prev</a></span>
+      --> 
+      <span class="pager current">1</span> 
+      <span class="pager"><a href="syntax.html">2</a></span> 
+      <span class="pager"><a href="data.html">3</a></span> 
+      <span class="pager"><a href="looking.html">4</a></span> 
+      <span class="pager"><a href="walking.html">5</a></span> 
+      <span class="pager"><a href="spels.html">6</a></span> 
+      <span class="pager"><a href="actions.html">7</a></span> 
+      <span class="pager"><a href="addendum.html">8</a></span> 
+      <span class="pager"><a href="no_macros.html">9</a></span> 
+      <span class="pager"><a href="syntax.html">next &gt;</a></span> 
+      <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+      <span class="pagertext">Title</span> 
+    </div> 
+    <div class="title"> 
+      <div style="background-color: #9afffb;"> 
+        Ever wonder what makes Lisp so powerful?<br> 
+        Now you can find out for yourself -<br> 
+      </div> 
+      <img src="images/casting_spels.jpg" alt="Cover image"> 
+      <div style="background-color: #b8ff97">
+        <b>A Comic Book</b><br>
+        By <a href="mailto:lisperati@gmail.com">Conrad Barski, M.D.</a>,
+        lisperati.com<br> 
+        Clojure Version by Wei-Ju Wu<br>
+        licensed under the <a href="http://www.gnu.org/licenses/fdl.txt"> 
+        GNU Free Documentation License 1.2</a><br> 
+        <table cellspacing="10"> 
+          <tbody><tr> 
+            <td class="linkcell"><a href="http://www.lisperati.com/casting.html">Original Version</a></td> 
+            <td class="linkcell"><a href="http://www.lisperati.com/casting-spels-emacs/html/casting-spels-emacs-1.html">Emacs Lisp Version</a></td> 
+            <td class="linkcell"><a href="http://www.ileriseviye.org/Makale/lisperati-tr/">Turkish Version</a></td> 
+            <td class="linkcell"><a href="http://www.rubyquiz.com/quiz49.html">Ruby Version</a></td> 
+            <td class="linkcell"><a href="http://jpmoresmau.blogspot.com/2006/11/my-first-haskell-adventure-game.html">Haskell Version?!</a></td> 
+          </tr> 
+        </tbody> 
+      </table> 
+    </div> 
+    </div> 
+    <div class="textblock"> 
+      <p> 
+        Anyone who has ever learned to program in Lisp will tell you it is very
+        different from any other programming language. It is different in lots
+        of surprising ways - This comic book will let you find out how Lisp's
+        unique design makes it so powerful !</p> 
+      <p> 
+        This tutorial was adapted for Clojure, an exciting new dialect of Lisp
+        running on the Java Virtual Machine. Clojure's syntax and API resembles
+        Common Lisp, but there are enough differences to write a dedicated
+        version of this book.
+      </p> 
+      <p> 
+        Most of the time, we will say "Lisp" instead of "Clojure", since most
+        of the concepts presented apply to Lisp in general - we will point out
+        the places where Clojure handles things a little different.
+      </p> 
+    </div> 
+    <img src="images/different.jpg" alt="Lisp is different"> 
+    <div class="textblock"> 
+      <p> 
+        Since Clojure is based on the JVM, you will need to have Java installed on your
+        system. If you have a Mac, Java is already installed. On a Linux
+        or Windows system, you might have to download it from
+        <a href="http://java.sun.com/javase/downloads/index.jsp">Oracle's Java website</a>.
+        You can get the latest version of Clojure from it's <a href="http://clojure.org">website</a>.</p> 
+        <p> 
+        For the examples in this tutorial, simply unpack the archive, open
+        a command line tool and switch to Clojure's main directory. Then enter:
+      </p> 
+        <pre class="prettyprint">java -jar clojure.jar</pre> 
+        If everything is working correctly, you should see Clojure's input
+        prompt, which should look similar to this:
+        <pre class="console"> 
+Clojure 1.1.0
+user=>
+        </pre> 
+      <p>This tutorial has small bits of Clojure code written in</p> 
+      <pre class="prettyprint lang-clojure">'(these kinds of boxes)</pre> 
+      <p> 
+      ...Simply copy these snippets into the prompt of the Clojure REPL
+      (read-eval-print-loop) and
+      by the time the tutorial is done you will have
+      <b>your own text adventure game !</b></p> 
+    </div> 
+    <hr> 
+    <div class="bottom"> 
+    <!--
+      <span class="pager"><a href="casting.html">&lt;&lt; first</a></span>
+      <span class="pager"><a href="casting.html">&lt; prev</a></span>
+      --> 
+      <span class="pager current">1</span> 
+      <span class="pager"><a href="syntax.html">2</a></span> 
+      <span class="pager"><a href="data.html">3</a></span> 
+      <span class="pager"><a href="looking.html">4</a></span> 
+      <span class="pager"><a href="walking.html">5</a></span> 
+      <span class="pager"><a href="spels.html">6</a></span> 
+      <span class="pager"><a href="actions.html">7</a></span> 
+      <span class="pager"><a href="addendum.html">8</a></span> 
+      <span class="pager"><a href="no_macros.html">9</a></span> 
+      <span class="pager"><a href="syntax.html">next &gt;</a></span> 
+      <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+      <span class="pagertext">Title</span> 
+    </div> 
+</div> 
+</body> 
+</html> 

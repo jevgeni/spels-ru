@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"> 
+ <html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <link href="css/style.css" type="text/css" rel="stylesheet"> 
+    <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
+    <script type="text/javascript" src="js/prettify.js"></script> 
+    <script type="text/javascript" src="js/lang-clojure.js"></script> 
+    <title>Casting SPELs with Clojure: Walking Around in our World</title> 
+  </head> 
+  <body onLoad="prettyPrint()"> 
+    <div class="main"> 
+      <div class="top"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="looking.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager current">5</span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="spels.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Walking Around...</span> 
+      </div> 
+      <div class="heading">Walking Around in our World</div> 
+      <div class="textblock"> 
+        <p> 
+        Ok, now that we can see our world, let's write some code
+        that lets us walk around in it. The function
+        <code>walk-direction</code> (not in the
+        <i>functional style</i>) takes a direction and lets us
+        walk there:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(defn walk-direction [direction]
+  (let [next (first (filter (fn [x] (= direction (first x)))
+                            (rest (location game-map))))]
+    (cond next (do (def location (nth next 2)) (look))
+          :else '(you cannot go that way -))))</pre> 
+        <p> 
+        The special command <code>let</code> allows us to create
+        the local variable <code>next</code>, which we set to
+        the path descriptor for the direction the player wants
+        to walk in - <code>rest</code> just chops the first
+        item off of a list. If the user types in a bogus direction,
+        <code>next</code> will be <code>()</code>. The
+        <code>cond</code> command is like a chain of if-then
+        commands in Lisp: Each row in a cond has a value to
+        check and an action to do. In this case, if the
+        <i>next location</i> is not nil, it will <code>def</code> 
+        the player's location to the third item (the one at index 2) in the path
+        descriptor, which holds the symbol describing the
+        new direction, then gives the user a look of the new
+        place. If the <code>next</code> location is <code>nil</code>,
+        it falls through to the next line and admonishes the
+        user. Let's try it:
+        </p> 
+        <pre class="prettyprint lang-clojure"> 
+(walk-direction 'west)</pre> 
+        <pre class="console"> 
+user=> (walk-direction 'west)
+(you are in a beautiful garden -
+there is a well in front of you -
+there is a door going east from here -
+you see a frog on the floor -
+you see a chain on the floor -)
+        </pre> 
+      <div class="note"> 
+        <p> 
+          <img src="images/wizard-small.png"
+               style="margin-right:15px; float: left" alt="Little Wizard"> 
+          In Clojure, <code>nil</code> and the empty list ("()") are not the same,
+          this is different from Common Lisp.
+        </p> 
+      </div> 
+      <p>&nbsp;</p> 
+        <p> 
+        Now, we were able to simplify our description functions by
+        creating a <code>look</code> command that is easy for our
+player to type. Similarly, it would be nice to adjust the
+<code>walk-direction</code> command so that it doesn't have an
+annoying quote mark in the command that the player has to
+type in. But, as we have learned, when the compiler reads
+a form in <b>Code Mode</b>, it will read all its parameters
+in <b>Code Mode</b>, unless a quote tells it not to. Is
+there anything we can do to tell the compiler that
+<code>west</code> is just a piece of data without the quote?
+        </p> 
+      </div> 
+      <hr> 
+      <div class="bottom"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="looking.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager current">5</span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager"><a href="no_macros.html">9</a></span> 
+        <span class="pager"><a href="spels.html">next &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pagertext">Walking Around...</span> 
+      </div> 
+  </div> 
+ </body> 
+</html> 

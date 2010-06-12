@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <link href="css/style.css" type="text/css" rel="stylesheet"> 
+    <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
+    <script type="text/javascript" src="js/prettify.js"></script> 
+    <script type="text/javascript" src="js/lang-clojure.js"></script> 
+    <title> 
+      Casting SPELs with Clojure: The Case Against the Word "Macro"
+    </title> 
+  </head> 
+  <body onLoad="prettyPrint()"> 
+    <div class="main"> 
+      <div class="top"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager current">9</span> 
+        <span class="pagertext">The Case Against...</span> 
+      </div> 
+      <div class="heading">The Case Against the Word "Macro"</div> 
+      <div class="textblock"> 
+        <p> 
+        Part of the purpose of writing this tutorial is to
+        experiment with ways that can tackle the difficult
+        subject of <b>true macros</b> in Lisp. Often, when
+        I try to explain the concept of macros to somebody
+        who has only used other languages, I'll get a
+        response like
+        "Oh yeah! There's macros like that in C++, too!".
+        The moment this happens, it becomes very difficult
+        to explain "true macros", because of the semantic
+        load on the word "macro". After all, "true macros"
+        <i>really are</i> a lot like C++ macros, in that
+        they are a way to talk to the compiler with modified code...
+        </p> 
+        <p> 
+        ...so imagine if John McCarthy had used the word "add"
+        instead of "cons" to connect items to lists: It would
+        make it really difficult to explain how consing works.
+        </p> 
+        <p> 
+        Therefore, I decided to experiment with a new term for
+        a macro in this essay: <b>SPEL</b>, which stands for
+        "<b>S</b>emantic <b>P</b>rogram <b>E</b>nhancement <b>L</b>ogic",
+        which is
+        admittedly a bit of a stretch, but the term has many benefits:
+        </p> 
+     </div> 
+     <div class="textblock"> 
+     <ol> 
+       <li> 
+       It captures the almost magical power that Lisp macros
+       can have to change the behavior of a Lisp environment.</li> 
+       <li>The term SPEL can be used in a million different ways
+       to explain programming concepts in elegant ways, using
+       the metaphor of the <i>spell</i> and <i>casting spells</i>.
+       </li> 
+       <li> 
+       The term causes no confusion between true macros and other
+       types of macros.
+       </li> 
+       <li> 
+       The semantic load of the term "spel" is very low. A Google
+       search for "(macro OR macros) programming -lisp -scheme"
+       returned 1150000 hits. A Google search for
+       "(spel OR spels) programming -lisp -scheme"
+       returned only 28400. Even worse when you consider that
+       the search "(macro OR macros) programming (lisp OR scheme)"
+       only returned a measly 395000!
+       </li> 
+     </ol> 
+   </div> 
+   <div class="textblock"> 
+     <p> 
+     So I hope, as a Lisper, you'll consider supporting this new
+     term - Naturally, any new memes like this have a very low
+     likelihood of success.
+     </p> 
+     <p> 
+     If you have a library or are a Lisp implementation author,
+     <b>please drop everything you are doing right now and</b> 
+     add the following line to your library:
+     </p> 
+     <pre class="prettyprint lang-clojure"> 
+(defmacro defspel [& rest] `(defmacro ~@rest))</pre> 
+     <p> 
+     There, problem solved! :)
+     </p> 
+     <p> 
+     -- Conrad Barski, M.D.
+     </p> 
+   </div> 
+      <div class="bottom"> 
+        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
+        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">1</a></span> 
+        <span class="pager"><a href="syntax.html">2</a></span> 
+        <span class="pager"><a href="data.html">3</a></span> 
+        <span class="pager"><a href="looking.html">4</a></span> 
+        <span class="pager"><a href="walking.html">5</a></span> 
+        <span class="pager"><a href="spels.html">6</a></span> 
+        <span class="pager"><a href="actions.html">7</a></span> 
+        <span class="pager"><a href="addendum.html">8</a></span> 
+        <span class="pager current">9</span> 
+        <span class="pagertext">The Case Against...</span> 
+      </div> 
+   </div> 
+  </body> 
+</html>
