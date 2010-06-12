@@ -1,0 +1,71 @@
+body {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 11pt;
+    text-align: center;
+}
+code {
+  font-weight: bold;
+}
+.title {
+    width: 500px;
+    margin: 0px auto;
+    padding: 0px;
+    border: 1px solid black;
+}
+ 
+.main {
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+}
+.textblock {
+    text-align: left;
+    width: 100%;
+}
+.heading {
+    background-color: #b8ff93;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    padding-top: 20px;
+    border: 1px dashed black;
+    height: 40px;
+}
+ 
+.top, .bottom {
+  height: 2em;
+}
+.console {
+  font-size: 10pt;
+  background-color: black;
+  color: #00ff00;
+  padding: 5px;
+}
+.note {
+  text-align: left;
+  font-size: 11pt;
+  border: 1px black dashed;
+  font-style: italic;
+  color: black;
+  padding: 5px;
+  vertical-align: top;
+}
+div.note h3 {
+  color: red;
+  font-weight: bold;
+}
+ 
+.pager {
+  font-size: 9pt;
+  padding: 2px 5px 2px 5px;
+  border: 1px #aaaaaa solid;
+}
+.pagertext {
+  font-size: 9pt;
+  font-style: italic;
+}
+ 
+.current {
+  background-color: #555555;
+  color: #ffffff;
+}
