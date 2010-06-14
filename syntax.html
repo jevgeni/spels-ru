@@ -2,15 +2,15 @@
    "http://www.w3.org/TR/html4/strict.dtd"> 
 <html> 
   <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
     <title>Casting SPELs with Clojure: Syntax and Semantics</title> 
   </head> 
   <body> 
     <div class="main"> 
       <div class="top"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="casting.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; Начало</a></span> 
+        <span class="pager"><a href="casting.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager current">2</span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -20,58 +20,44 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="data.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Syntax and Semantics</span> 
+        <span class="pager"><a href="data.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
+        <span class="pagertext">Синтаксис и Семантика</span> 
       </div> 
-      <div class="heading">Syntax and Semantics</div> 
+      <div class="heading">Синтаксис и Семантика</div> 
       <div class="textblock"> 
-        <p> 
-          Every computer language has code that is made up of <i>syntax</i> 
-          and <i>semantics</i>. The <i>syntax</i> of a programming language
-          is the basic skeleton your program has to follow so that the
-          compiler knows <i>what's what</i> in your program, so it can tell
-          what's a function, a variable, etc. The <i>semantics</i> of a
-          program is the more "random" stuff, like the different commands you
-          have available and what variables you're allowed to look at at any
-          point in the program. The first thing that is special about Lisp
-          is that it has the simplest syntax of any major programming
-          language.
+        <p> Каждый компьютерный язык это код, которые состоит из <i>синтаксиса</i> и <i>семантики</i>. <i>Синтаксис</i>
+          языка программирования это элементарные инструкции, которым должна следовать ваша программа, чтобы компилятор
+          знал <i>что есть что</i> в вашей программе, и мог бы понять, что в коде функция, что переменная и так
+          далее. <i>Семантика</i>программы это более "случайная" вещь, например различные команды, которые доступны,
+          какие переменные можно просматривать в любой точке программы. Первая вещь, которая особая в Lisp, это то, что
+          у него самый простой синтаксис среди наиболее распространенных языков программирования.
         </p> 
-        <p> 
-          Basically, the Lisp syntax dictates that any text you give the Lisp
-          compiler has to be arranged into lists, which can be nested into
-          lists of lists or such as needed. The parenthesis mark the
-          beginning and end of each list:
+        <p> По существу, синтаксис Lisp-а требует, чтобы любой текст, который вы даете компилятору Lisp-а, должен был бы
+	  располагаться в списках, которые могут быть вложены в другие списки списов, если необходимо. Круглые скобки
+	  обозначают начало и конец каждого списка:
         </p> 
       </div> 
-      <img src="images/list.jpg" alt="Lisp List"> 
+      <img src="images/list.jpg" alt="Список Lisp"> 
       <div class="textblock"> 
-        <p> 
-          Additionally, the Lisp compiler uses two modes when it reads your
-          code: A <b>Code Mode</b> and a <b>Data Mode</b>. When you're in
-          <b>Data Mode</b>, you can put anything you want into your lists.
-          However, the compiler first starts off reading your code in
-          <b>Code Mode</b> - In <b>Code Mode</b>, your lists need to be a
-          special type of list called a <b>form</b>:
+        <p> В добавлении к этому, компилятор Lisp использует два режима при чтении вашего кода: <b>Режим Кода</b>
+        и <b>Режим Данных</b>. Когда вы в <b>Режиме Данных</b>, вы можете класть все что угодно в ваши списки. Однако,
+        компилятор сначала начинает читать ваш код в <b>Режиме Кода</b> - В <b>Режиме Кода</b> ваши списки должны быть
+        составлены в виде особого типа списка, называемого <b>формой</b>:
         </p> 
       </div> 
-      <img src="images/frame.jpg" alt="Lisp Form"> 
+      <img src="images/frame.jpg" alt="Форма Lisp"> 
       <div class="textblock"> 
-        <p> 
-        A form is a list where the first symbol in the list has to be a
-        special word that the compiler can understand - usually the name
-        of a function. In this case, the compiler will send the other items
-        of the list to the function as parameters. When it reads the text
-        for these parameters, it will usually assume that they are
-        <i>also</i> in <b>Code Mode</b>, unless you tell it to flip into
-        <b>Data Mode</b>.
+        <p> Форма, это список, где первый символ в списке должен быть специальным словом, который компилятор понимает -
+	обычно имя функции. В этом случае компилятор отправит остальные элементы списка в функцию в качестве
+	параметров. Когда он будет считывать текст этих параметров, он обычно будет предполагать, что они <i>тоже</i>
+	находятся в <b>Режиме Кода</b>, только если вы не скажете им переключиться в <b>Режим Данных</b>.
         </p> 
       </div> 
       <hr> 
       <div class="bottom"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="casting.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="casting.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager current">2</span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -81,9 +67,9 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="data.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Syntax and Semantics</span> 
+        <span class="pager"><a href="data.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
+        <span class="pagertext">Синтаксис и Семантика</span> 
         </div> 
     </div> 
   </body> 
