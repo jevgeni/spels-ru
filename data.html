@@ -2,7 +2,7 @@
    "http://www.w3.org/TR/html4/strict.dtd"> 
 <html> 
   <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
     <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
     <script type="text/javascript" src="js/prettify.js"></script> 
@@ -12,8 +12,8 @@
   <body onLoad="prettyPrint()"> 
     <div class="main"> 
       <div class="top"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="syntax.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="syntax.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager current">3</span> 
@@ -23,36 +23,27 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="looking.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Defining Data...</span> 
+        <span class="pager"><a href="looking.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
+        <span class="pagertext">Опеределяем данные...</span> 
       </div> 
-      <div class="heading">Defining the Data for our Game World</div> 
+      <div class="heading">Опеределяем данные для нашего Игрового Мира</div> 
       <div class="textblock"> 
-        <p> 
-          In order to learn some more about forms, let's create a some forms
-          that create the data for our game world. First of all, our game is
-          going to have some objects in it that the player can pick up and
-          use - let's define those objects:
+        <p> Для того, чтобы узнать больше о формах, давайте создадим несколько форм, которые создадут данные для нашего
+	  игрового мира. Для начала, в нашей игре будет несколько объектов, которые игрок сможет подбирать и
+	  использовать - давайте определим эти объекты:
         </p> 
         <pre class="prettyprint lang-clojure">(def objects '(whiskey-bottle bucket frog chain))</pre> 
-        <p> 
-          Ok, now let's dissect this line and see what it means: Since a Lisp
-          compiler always starts reading things in <b>Code Mode</b> and expects
-          a form, the first symbol, <code>def</code>, must be a
-          command. In this case,
-          the command sets a variable to a value: The variable is
-          <code>objects</code> 
-          and the value we are setting it to is a list of four
-          objects. Now, since the list is data (i.e. we don't want the compiler
-          to try and call a function called <code>whiskey-bottle</code>)
-          we need to "flip" the compiler into <b>Data Mode</b> when
-          reading the list.
-          The single quote in front of the list is the command that tells
-          the compiler to flip:
+        <p> Отлично, теперь разберем эту строчку и посмотрим, что она означает: так как компилятор Lisp всегда начинает
+	  читать в <b>Режиме Кода</b> и ожидает форму, то первый символ <code>def</code> должен быть командой. В этом
+	  случае, команда устанавливает переменной значение: переменная это <code>objects</code> и значение, которые мы
+	  устанавливаем ей это список из четырех объектов. Теперь, так как список это данные (т.е. мы не хотим, чтобы
+	  компилятор пытался вызывать функцию, которая называется <code>whiskey-bottle</code>), то мы должны
+	  "переключить" компилятор в <b>Режим Данных</b>, когда он будет читать этот список. Одинарная кавычка в начале
+	  списке это команда, которые указывает компилятору переключиться:
         </p> 
       </div> 
-      <img src="images/objects.jpg" alt="Objects list"> 
+      <img src="images/objects.jpg" alt="Список объектов"> 
       <div class="textblock"> 
         <p> 
           The <code>def</code> command stands for "<b>def</b>ine a value". (If
