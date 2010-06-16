@@ -2,7 +2,7 @@
    "http://www.w3.org/TR/html4/strict.dtd"> 
 <html> 
   <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <link href="css/style.css" type="text/css" rel="stylesheet"> 
     <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
     <script type="text/javascript" src="js/prettify.js"></script> 
@@ -12,8 +12,8 @@
   <body onLoad="prettyPrint()"> 
     <div class="main"> 
       <div class="top"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="data.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="data.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -23,87 +23,66 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="walking.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
+        <span class="pager"><a href="walking.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
         <span class="pagertext">Looking Around...</span> 
       </div> 
       <div class="heading">Looking Around in our Game World</div> 
       <div class="textblock"> 
-        <p> 
-          The first command we'd want to have is a command that tells us
-          about the location we're standing in. So what would a function
-          need to describe a location in a world? Well, it would need to
-          know the location we want to describe and would need to be able
-          to look at a map and find that location on the map. Here's our
-          function, and it does exactly that:
-        </p> 
+        <p> Первая команда, которую мы хотим создать - это команда, которая сможет рассказать, где мы сейчас
+        находимся. Что же должна знать функция, чтобы смогла нам описать место в мире? Ну, ей будет нужно знать название
+        места, описание которого мы хотим получить и ей нужно будет доступ к игровой карте, чтобы найти это место на
+        ней. Вот наша функция и она выполняет именно это:
+        </p>
         <pre class="prettyprint lang-clojure"> 
 (defn describe-location [location game-map]
   (first (location game-map)))</pre> 
         <p> 
-          The word <code>defn</code> means, as you'd expect, that we're
-          defining a function. The name of the function is
-          <code>describe-location</code> and it takes two parameters:
-          a location and a game map. Since these variables appear in the
-          function's parameters, it means they are local and hence unrelated
-          to the global <code>location</code> and <code>game-map</code> 
-          variables we defined earlier. Note that functions in Lisp are often more like
-          functions in math than in other programming languages: Just
-          like in math, this function does not print stuff for the user
-          to read or pop up a message box: All it does is return a value
-          as a result of the function that contains the description.
-          Let's imagine our location is in the living-room (which, indeed,
-          it is...).
+          Слово <code>defn</code> означает, как вы и ожидали, то, что мы определяем функцию. Имя функции - 
+          <code>describe-location</code> и она принимает два параметра: место (location) и игровую карту (game-map). Так
+          как это переменные находятся в списке параметров функции, то это означает, что они локальные и поэтому никак
+          не связаны с глобальными переменными <code>location</code> и <code>game-map</code>, которые мы определили
+          ранее. Обратите внимание, что функции в Lisp-е больше похожи на функции в математике, нежели на функции в
+          других языках программирования: Также как и в математике, эта функция не выводит ничего пользователю на чтение
+          или не создает выскакивающее окошки: все что она делает это возвращает значает, которое содержит
+          описание. Давайте представим, что наше месторасположение это гостинная (living-room), что впрочем,
+          действительно так:
         </p> 
       </div> 
        <div class="note"> 
         <p> 
-          <img src="images/wizard-small.png"
-               style="margin-right:15px; float: left" alt="Little Wizard"> 
-          Clojure expects the parameter lists in square brackets. Most other
-          Lisps expect parentheses here.
+          <img src="images/wizard-small.png" style="margin-right:15px; float: left" alt="Little Wizard"> Clojure ожидает
+               список параметров в квадратных скобках. Большинство других Lisp-ов ожидают здесь круглые скобки.
         </p> 
        </div> 
       <p>&nbsp;</p> 
       <img src="images/living_room.jpg" alt="Living Room"> 
       <div class="textblock"> 
-        <p> 
-          To find the description for this, our <code>describe-location</code> 
-          first needs to look up the
-          spot in the map that points to the living-room.
-          <code>(location game-map)</code> performs the lookup on the
-          <code>game-map</code> hash map and then returns the data
-          describing the living-room. Then the command <code>first</code> 
-          trims out the first item in that list, which is the description
-          of the living-room (If you look at the <code>game-map</code> 
-          variable we had created, the snippet of text describing the
-          living-room was the second item in the list that contained
-          <i>all</i> the data about the living room...)
+        <p> Чтобы найти описание для нее, наша функция <code>describe-location</code> для начала должна найти место в
+          нашей игровой карте, которое указывает на гостиную (living-room). <code>(location game-map)</code> выполняет
+          поиск в отображении <code>game-map</code> (hash map) и затем возвращает данные, описывающие гостинную. Затем команда
+          <code>first</code> выдергивает первый элемент списка, который и описывает гостинную. (Если взглянуть на
+          переменную <code>game-map</code>, которую мы создали, то будет видно, что часть кода, описывающая
+          гостинную была первой в списке, который описывает <i>все</i> данные о гостинной...)
         </p> 
         <p> 
-          Now let's use our Lisp prompt to test our function - Again,
-          like all the text in
+          Теперь давайте используем Clojure консоль чтобы проверить нашу функцию - Еще раз, весь текст в таких блоках
         </p> 
-        <pre class="prettyprint lang-clojure">'(this font and color)</pre> 
+        <pre class="prettyprint lang-clojure">'(с таким шрифтом и цветом)</pre> 
         <p> 
-          in the tutorial, paste the following text into your Lisp prompt:
+          в этом руководстве, копируйте в консоль Clojure: 
         </p> 
         <pre class="prettyprint lang-clojure">(describe-location 'living-room game-map)</pre> 
         <pre class="console"> 
  user=&gt; (describe-location 'living-room game-map)
  (you are in the living-room of a wizard's house -
  there is a wizard snoring loudly on the couch -)</pre> 
-        <p> 
-          Perfect! Just what we wanted... Notice how we put a quote
-          in front of the symbol <code>living-room</code>, since
-          this symbol is just a piece of data naming the location
-          (i.e. we want it read in <b>Data Mode</b>) , but how we
-          didn't put a quote in front of the symbol
-          <code>game-map</code>, since in this case we want the
-          list compiler to hunt down the data stored in the
-          <code>game-map</code> variable (i.e. we want the compiler
-          to be in <b>Code Mode</b> and not just look at the word
-          <code>game-map</code> as a chunk of raw data)
+        <p> Отлично! Это как раз то, что мы хотели... Обратите внимание, что мы добавили одинарную кавычную в начале
+          символа <code>living-room</code>, так как этот символ просто данные, название места (т.е. мы хотим, чтобы это
+          было прочитано в <b>Режиме Данных</b>). При этом, мы не добавляли кавычку перед
+          символом <code>game-map</code>, так как в этом случае мы хотим, чтобы Lisp компилятор отправился за данными,
+          которые хранятся в переменной <code>game-map</code> (т.е. мы хотим, чтобы компилятор бы в <b>Режиме Кода</b> а
+          не просто смотрел бы на слово <code>game-map</code> как на порцию необработанных данных)
         </p> 
       </div> 
       <div class="heading">The Functional Programming Style</div> 
