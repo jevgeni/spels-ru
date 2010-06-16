@@ -45,25 +45,18 @@
       </div> 
       <img src="images/objects.jpg" alt="Список объектов"> 
       <div class="textblock"> 
-        <p> 
-          The <code>def</code> command stands for "<b>def</b>ine a value". (If
-          you already know Common Lisp, you might know that an equivalent
-          command would be "<code>setf</code>". Clojure actually does not have
-          a <code>setf</code> command).
+        <p> Команда <code>def</code> используется, чтобы задать значение. (от английского слова "<b>def</b>ine",
+          "задать"). (Если вы уже знаете Common Lisp, то можете знать, что эквивалентная команда была бы
+          "<code>setf</code>". У Clojure, на самом деле, команды <code>setf</code> нет).
         </p> 
-        <p> 
-          Now that we've defined some objects in our world, let's ramp it up a
-          step and define a map of the actual world itself. Here is a picture
-          of what our world looks like:
+        <p> Теперь, после того как мы определили объекты в нашем мире, давайте создадим и карту (отображение?) реального
+        мира. Вот картина, как наш мир может выглядеть:
         </p> 
       </div> 
-      <img src="images/world.jpg" alt="Game world"> 
+      <img src="images/world.jpg" alt="Игровой мир"> 
       <div class="textblock"> 
-        <p> 
-          In this simple game, there will only be three different locations: A
-          house with a living room and an attic, along with a garden. Let's
-          define a new variable, called <code>game-map</code> that
-          describes this mini world:
+        <p> В этой простой игре будет только три различных направления: дом с гостиной и чердаком, а также сад. Давайте
+	  определим новую переменную, называемую <code>game-map</code>, которая будет описывать наш маленький мир:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (def game-map (hash-map
@@ -80,12 +73,10 @@
              welding torch in the corner -)
             (downstairs stairway living-room))))
         </pre> 
-        <p> 
-          This map contains everything important that we'd like to
-          know about our three locations: a unique name for the
-          location (i.e. <i>house</i>, <i>garden</i>, and
-          <i>attic</i>) a short description of what we can see from there
-          (stored in its own list within the bigger list) , plus the
+        <p> Это отображение содержит все необходимое, что мы хотим знать о наших трех местоположениях: уникальное имя
+          для каждого из местоположения (т.е. <i>house</i>, <i>garden</i>, and
+          <i>attic</i>), небольшое описание того, что мы можем там увидеть (хранится в своем собственном списке внутри
+          большого списка), плюс к этому  , plus the
           <i>where and how</i> of each path into/out of that
           place. Notice how information-rich this one variable is and
           how it describes all we need to know but not a thing more -
