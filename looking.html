@@ -25,9 +25,9 @@
         <span class="pager"><a href="no_macros.html">9</a></span> 
         <span class="pager"><a href="walking.html">вперед &gt;</a></span> 
         <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
-        <span class="pagertext">Looking Around...</span> 
+        <span class="pagertext">Осмотримся Вокруг...</span> 
       </div> 
-      <div class="heading">Looking Around in our Game World</div> 
+      <div class="heading">Осмотримся Вокруг в нашем Игровом Мире</div> 
       <div class="textblock"> 
         <p> Первая команда, которую мы хотим создать - это команда, которая сможет рассказать, где мы сейчас
         находимся. Что же должна знать функция, чтобы смогла нам описать место в мире? Ну, ей будет нужно знать название
@@ -85,84 +85,59 @@
           не просто смотрел бы на слово <code>game-map</code> как на порцию необработанных данных)
         </p> 
       </div> 
-      <div class="heading">The Functional Programming Style</div> 
+      <div class="heading">Функциональный стиль программирования</div> 
       <div class="textblock"> 
-        <p> 
-          You may have noticed that our <code>describe-location</code> 
-          function seems
-          pretty awkward in several different ways. First of all, why are
-          we passing in the variables for location and map as parameters,
-          instead of just reading our global variables directly? The reason
-          is that Lispers often like to write code in the
-          <b>Functional Programming Style</b> (To be clear, this is
-          completely unrelated in any way to the concept called
-          "procedural programming" or "structural programming" that you
-          might have learned about in high school...). In this style,
-          the goal is to write functions that always follow the following
-          rules:
+        <p> Вы могли заметить, что наша функция <code>describe-location</code> выглядит доволько неуклюже в нескольких
+          местах. В первую очередь, зачем мы передаем переменные, обозначающее место и игровую карту как параметры,
+          вместо того, чтобы просто напрямую прочитать наши глобальные переменные? Причина в том, что Лисперы часто
+          любят писать код в <b>Функциональном Стиле Программирования</b> (чтобы быть более точным, это никак не связано
+          с концепциями "процедурное программирование" или "структурное программирование" о которых вы возможно узнали в
+          старших классах...). В этом стиле, цель написать функции, которые всегда следуют следующим правилам:
         </p> 
         <ol> 
-          <li> 
-            You only read variables that are passed into the function or
-            are created by the function (So you don't read any global
-            variables)
+          <li> Вы используете только те переменные, которые передали в функцию или вы создали внутри функции (то есть вы
+            не используете глобальные переменные)
           </li> 
-          <li> 
-            You never change the value of a variable that has already
-            been set (So no incrementing variables or other such foolishness)
+          <li> Вы никогда не изменяете значение переменной, которые уже изменили (т.е. никакой ерунды вроде переменных с
+          приращением)
           </li> 
-          <li> 
-            You never interact with the outside world, besides returning
-            a result value. (So no writing to files, no writing messages
-            for the user)
+          <li> Вы никто не взаимодействуете с внешним миром, кроме как возвращаете результат функцци (то есть никаких
+          записей в файл или отправка сообщений пользователю)
           </li> 
         </ol> 
-        <p> 
-          You may be wondering if you can actually write any code like this
-          that actually does anything useful, given these brutal
-          restrictions... the answer is <i>yes</i>, once you get used to
-          the style... Why would anyone bother following these rules? One
-          very important reason: Writing code in this style gives your
-          program <b>referential transparency</b>: This means that a given
-          piece of code, called with the same parameters, always positively
-          returns the same result and does exactly the same thing no matter
-          when you call it - This can reduce programming errors and is
-          believed to improve programmer productivity in many cases.
+        <p> Вы наверное хотели бы знать, действительно ли можно написать такой код при таких жестких ограничениях и
+          чтобы он делал что-то полезное... и ответ - <i>да</i>, как только вы привыкните к стилю... Зачем вообще
+          волноваться и следовать этим правилам? По одной важной причине: Код, написанный в таком стиле, дает вашей
+          программе <b>прозрачность ссылок</b>: Это означает, что некая часть кода, вызванная с одними и теми же
+          параметрами, всегда возвращает один и тот же результат и делает одну и ту же вещь вне зависимости от того,
+          когда вы его вызовете - это уменьшает количество ошибок при программировании и полагают, что улучшает
+          продуктивность программиста в большинстве случаев.
         </p> 
-        <p> 
-          Of course, you'll always have some functions that are not
-          <b>functional</b> in style or you couldn't communicate with
-          the user or other parts of the outside world. Most of the
-          functions later in this tutorial do not follow these rules.
+        <p> Конечно, у вас всегда будут функции, которые не написаны в <b>функциональном</b> стиле или иначе вы не
+          смогли бы общаться с пользователем или другими частями внешнего мира. Большиство функции далее в этом
+          руководстве не следуют этим правилам.
         </p> 
-        <p> 
-          Another problem with our <code>describe-location</code> 
-          function is that it does not tell us about the paths in and
-          out of the location to other locations. Let's write a function
-          that describes these paths:
+        <p> Другая проблема с нашей функцией <code>describe-location</code> это то, что она не говорит нам о путях в
+          наше место в/из нашего места в другие места. Давате напишем функцию, которая бы описывала эти пути:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn describe-path [path]
   `(there is a ~(second path) going ~(first path) from here -))</pre> 
-        <p> 
-          Ok, now this function looks pretty strange: It almost looks
-          more like a piece of data than a function. Let's try it out
-          first and figures out <i>how</i> it does what it does later:
+        <p> Хорошо, теперь эта функции выглядит довольно странно: Она больше похожа на данные, чем на функцию. Давайте
+          ее сперва попробуем, а позже разберемся <i>как</i> она это делает:
         </p> 
         <pre class="prettyprint lang-clojure">(describe-path '(west door garden))</pre> 
         <pre class="console"> 
 user=&gt; (describe-path '(west door garden))
 (user/there user/is user/a door user/going west user/from user/here clojure.core/-)</pre> 
         <p> 
-          <b>What is that !?</b> The result is now cluttered with strange '/' characters and
-          extra words ! This is because Clojure adds namespace information
-          in to expressions that begin with a backquote. We won't go into
-          detail here, but instead provide you with a way to remove that confusing
-          output:
+          <b>Что это !?</b> Результат завален странными знаками '/' и дополнительными словами ! Это потому что Clojure
+          добавляет информацию о пространстве имено во все выражения, которые начинаются с обратной кавычки. Мы не будем
+          вдаваться здесь в подробности, вместо этого мы предложим вам способ убрать этот смущающий текст:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn spel-print [list] (map (fn [x] (symbol (name x))) list))</pre> 
-        and enter
+        и введем
         <pre class="prettyprint lang-clojure"> 
 (spel-print (describe-path '(west door garden)))</pre> 
         <pre class="console"> 
@@ -170,69 +145,46 @@ user=&gt; (spel-print (describe-path '(west door garden)))
 (there is a door going west from here -)</pre> 
        <div class="note"> 
         <p> 
-          <img src="images/wizard-small.png"
-               style="margin-right:15px; float: left" alt="Little Wizard"> 
-          Clojure namespaces are out of the scope of this tutorial. They are
-          an important concept to Clojure, so we recommend to read
-          about them in the language documentation.
+          <img src="images/wizard-small.png" style="margin-right:15px; float: left" alt="Little Wizard"> Пространства
+               имен Clojure выходят за рамки этого руководства. Но это важная концепция, поэтому мы рекоммендуем вам
+               прочитать о них в документации к языку.
         </p> 
        </div> 
-        <p> 
-          So now it's clear: This function takes a list describing a
-          path (just like we have inside our <code>game-map</code> variable) and makes
-          a nice sentence out of it. Now when we look at the function
-          again, we can see that the function "looks" a lot like the
-          data it produces: It basically just splices the first and
-          second item from the path into a declared sentence. How does
-          it do this? It uses <b><i>back-quoting</i></b> !
+        <p> Теперь это более понятно: Функция принимает список, описывающий путь (именно так, как он хранится у нас в
+          нашей переменной <code>game-map</code>) и создает подробное предложение из него. Теперь когда мы посмотрим
+          опять на функци, мы можем заметить, что функция "выглядит" почти как данные, которые она выводит: по существе
+          это просто накладывание первого и второго элемента из нашего описания пути на указанное предложение. Как она
+          делает это? Здесь используется <b><i>обратная блокировка</i></b> !
         </p> 
-        <p> 
-          Remember that we've used a quote before to flip the
-          compiler from <b>Code Mode</b> to <b>Data Mode</b> - Well,
-          by using the back-quote (the quote in the upper left
-          corner of the keyboard) we can not only <b>flip</b>, but
-          then also <b>flop</b> back into <b>Code Mode</b> by using
-          a tilde ("~") character:
+        <p> Помните как мы использование одинарную кавычку чтобы переключить компилятор из <b>Режима Кода</b> в <b>Режим
+          Данных</b>? Так вот, используя обратную кавычку (кавычка, которая находится в верхнем левом углу клавиатуры)
+          мы можем не только переключать в компилятор в <b>Режим Данных</b>, но и затем переключать обратно в <b>Режим
+          Кода</b> используя символ тильда ("~"):
         </p> 
       </div> 
       <img src="images/flipflop.png" alt="Backquoted Form"> 
       <div class="textblock"> 
-        <p> 
-          This "back-quoting" technique is a great feature in Lisp -
-          it lets us write code that looks just like the data it
-          creates. This happens frequently with code written in a
-          functional style: By building functions that <i>look</i> 
-          like the data they create, we can make our code easier to
-          understand and also build for longevity: As long as the
-          data doesn't change, the functions will probably not need
-          to be refactored or otherwise changed, since they mirror
-          the data so closely. Imagine how you'd write a function
-          like this in VB or C: You would probably chop the path
-          into pieces, then append the text snippets and the pieces
-          together again - A more haphazard process that "looks"
-          totally different from the data that is created and
-          probably less likely to have longevity.
+        <p> Это техника "обратной блокировки" очень мощная вещь в Lisp - она позволяет нам писать код, которые выглядит
+          как данные, который он создает. Это происходит довольно часто с кодом, написанным в функциональном стиле:
+          создавая функции, которые <i>выглядят</i> как данные, которые они создают, мы можем сделать наш код более
+          простым для понимания и расчитывать на его долговечность: до тех пор, пока данные не изменятся, функции скорее
+          всего не нужно будет изменять, так как они будут очень близко отображать данные. Представьте, как бы вы
+          написание подобную функцию в VB или C: вы бы скорее всего разбили путь на кусочки, а затем объединили бы части
+          текста и эти кусочки вместе снова - более бессистемный процесс, который "выглядит" совсем иначе чем данные,
+          которые он создает, и скорее всего не такой долговечный.
         </p> 
-        <p> 
-          Now we can describe a path, but a location in our game
-          may have more than one path, so let's create a function
-          called <code>describe-path<b>s</b></code>:
+        <p> Теперь мы можем описать путь, но у места в нашей игре может быть более чем один путь, поэтому давайте
+          создатим функцию называющуюся <code>describe-path<b>s</b></code>:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn describe-paths [location game-map]
   (apply concat (map describe-path (rest (get game-map location)))))</pre> 
-        <p> 
-        This function uses another common functional
-        programming technique: The use of <b>Higher Order
-        Functions</b> - This means that the <code>apply</code> 
-        and <code>map</code> functions are taking other functions
-        as parameters so that they can call them themselves -
-        <code>map</code> simply applies another
-        function to every object in the list, basically causing all
-        paths to be changed into pretty descriptions by the
-       <code>describe-path</code> function. The "apply concat"
-       just cleans out some parentheses and isn't so important.
-       Let's try this new function:
+        <p> Эта функция использует другую распространенную технику функционального программирования:
+        использование <b>Функций более высокого порядка</b> - это означает что функции <code>apply</code>
+        и <code>map</code> принимают другие функции в качестве параметров, чтобы они сами могли их вызывать -
+        <code>map</code> просто применяет другую функцию к каждому объекту в списке, по существе заставляя каждый путь
+        превратиться в красивое описание благодаря функции <code>describe-path</code>. "apply concat" просто вычищает
+        некоторые скобки и не так важна. Давайте попробуем эту новую функцию:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (spel-print (describe-paths 'living-room game-map))</pre> 
@@ -240,37 +192,32 @@ user=&gt; (spel-print (describe-path '(west door garden)))
 user=&gt; (spel-print (describe-paths 'living-room game-map))
 (there is a door going west from here -
 there is a stairway going upstairs from here -)</pre> 
-        <p>Beautiful!</p> 
-        <p> 
-        We still have one thing we need to describe: If there are
-        any objects on the floor at the location we are standing
-        in, we'll want to describe them as well. Let's first write
-        a helper function that tells us wether an item is in a given place:
+        <p>Великолепно!</p> 
+        <p> У нас все еще есть одна вещь, которую нам необходимо описать: если в месте, где мы находимся, есть какие-то
+	  объекты на полу, то мы хотим получить информацию и о них. Давайте сначала написать небольшую вспомогательную
+	  функцию, которая будет нам сообщать, находится ли вещь в данном месте:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn is-at? [obj loc obj-loc] (= (obj obj-loc) loc))</pre> 
         <p> 
-        ...the <code>=</code> function tells us if the symbol from the object
-        location list is the same as the current location.
+        ...Функция <code>=</code> говорит нам, находится ли символ из списка объектов в нашем текущем месте.
         </p> 
       </div> 
       <img src="images/slob.jpg" alt="Slob"> 
       <div class="textblock"> 
         <p> 
-        Let's try this out:
+          Давайте попробуем ее:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (is-at? 'whiskey-bottle 'living-room object-locations)</pre> 
         <pre class="console"> 
 user=&gt; (is-at? 'whiskey-bottle 'living-room object-locations)
 true</pre> 
-        <p> 
-        The symbol <code>true</code> (or any value other than
-        <code>nil</code>) means that it's true that the whiskey-bottle
-        is in living-room.
+        <p> Символ <code>true</code> (или любое другое значение, а не <code>nil</code>) означает, что это правда, что
+          бутылка виски (whiskey-bottle) находится в гостинной (living-room).
         </p> 
         <p> 
-        Now let's use this function to describe the floor:
+          Теперь давайте используем эту функцию чтобы описать пол:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn describe-floor [loc objs obj-loc]
@@ -278,32 +225,23 @@ true</pre>
                        `(you see a ~x on the floor -))
                      (filter (fn [x] 
                                (is-at? x loc obj-loc)) objs))))</pre> 
-        <p> 
-        This function has a couple of new things: First of all,
-        it has anonymous functions (<code>fn</code> is the command for creating such a function.) That first <code>fn</code> form is just the same
-        as defining a helper function:
+        <p> В этой функции несколько новых вещей: Во-первых, в ней есть анонимные функции (<code>fn</code> это команда,
+          которая создает такие функции). Эта первая форма <code>fn</code> тоже самое, что определение вспомогательной функции:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn blabla [x] `(you see a ~x on the floor.))</pre> 
-        <p> 
-        and then sending
-        <code>blabla</code> 
-        to the map function. The <code>filter</code> function
-        in this case is filtering out any objects from the list that are not at the current
-        location before passing the list on to map to build pretty
-        sentences. Let's try this new function:
+        <p> и затем передача <code>blabla</code> в функцию map. Функция <code>filter</code> в этом случае, убирает все
+        объекты из списка, которые не находятся в текущем месте, прежде чем передать список в map чтобы создать красивые
+        предложения. Давайте попробуем эту новую функцию:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (spel-print (describe-floor 'living-room objects object-locations))</pre> 
         <pre class="console"> 
 user=> (spel-print (describe-floor 'living-room objects object-locations))
 (you see a whiskey-bottle on the floor - you see a bucket on the floor -)</pre> 
-        <p> 
-        Now we can tie all these descriptor functions into a single,
-        easy command called <code>look</code> that uses the global
-        variables (therefore this function is not in the
-        <b>Functional Style</b>) to feed all the descriptor functions
-        and describes <b>everything</b>:
+        <p> Теперь мы можем связать все описывающие функцци в одну простую команду, называемую <code>look</code>,
+          которая использует глобальные переменные (поэтому эта функци не написана в <b>Функциональм Стиле</b>),
+          передает их во все описывающие функции и тем самым описывает <b>все</b>:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn look []
@@ -313,7 +251,7 @@ user=> (spel-print (describe-floor 'living-room objects object-locations))
       </div> 
       <img src="images/functional.jpg" alt="Functional"> 
       <div class="textblock"> 
-        <p>Let's try it:</p> 
+        <p>Давайте попробуем ее:</p> 
         <pre class="console"> 
 user=> (look)
 (you are in the living room of a wizards house -
@@ -323,7 +261,7 @@ there is a stairway going upstairs from here -
 you see a whiskey-bottle on the floor -
 you see a bucket on the floor -)
         </pre> 
-        <p>pretty cool!</p> 
+        <p>Правда, здорово?</p> 
       </div> 
       <hr> 
       <div class="top"> 
@@ -340,7 +278,7 @@ you see a bucket on the floor -)
         <span class="pager"><a href="no_macros.html">9</a></span> 
         <span class="pager"><a href="walking.html">next &gt;</a></span> 
         <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Looking Around...</span> 
+        <span class="pagertext">Осмотримся вокруг...</span> 
       </div> 
     </div> 
   </body> 
