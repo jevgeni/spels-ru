@@ -76,18 +76,12 @@
         <p> Это отображение содержит все необходимое, что мы хотим знать о наших трех местоположениях: уникальное имя
           для каждого из местоположения (т.е. <i>house</i>, <i>garden</i>, and
           <i>attic</i>), небольшое описание того, что мы можем там увидеть (хранится в своем собственном списке внутри
-          большого списка), плюс к этому  , plus the
-          <i>where and how</i> of each path into/out of that
-          place. Notice how information-rich this one variable is and
-          how it describes all we need to know but not a thing more -
-          Lispers love to create small, concise pieces of code that
-          leave out any fat and are easy to understand
-          just by looking at them.
+          большого списка), плюс к этому <i>куда и как</i> можнo попасть в/из этого места. Обратите внимание, насколько
+          много информации хранится в одной переменной и как она описывает все, что нам нужно и ничего лишнего - Лисперы
+          любят создавать маленькие, лаконичные куски кода без шелухи, которые легко понять просто посмотрев на них.
         </p> 
-        <p> 
-          Now that we have a map and a bunch of objects, it makes
-          sense to create another variable that says where each of
-          these object is on the map:
+        <p> Теперь, когда у нас есть карта и набор объектов, имеет смысл создать другую переменную которая расскажет,
+          где эти объекты находятся на карте.
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (def object-locations (hash-map
@@ -97,40 +91,33 @@
                        'frog 'garden))
          </pre> 
          <p> 
-           Here we have associated each object with a location. Clojure provides
-           a data structure called a <b>Map</b>.
-           A Map is created by calling the <code>hash-map</code> function
-           with a list of parameters in the order <code>key1 value1 key2 value2...</code> 
-           Our
-           <code>game-map</code> variable was also a Map
-           list - the three keys in that case were <i>living-room</i>,
+           Теперь у нас каждый объект связан с конкретным местом. Clojure предлагает структуру данных, которая называется <b>Map</b> или отображение.
+           Отображение создается вызовом функции  <code>hash-map</code> со списком параметров в порядке <code>ключ1 значение1 ключ2 значение2...</code> 
+           Наша переменная <code>game-map</code> тоже является отображением - три ключа в этом случае были <i>living-room</i>,
            <i>garden</i>, and <i>attic</i>.
          </p> 
        </div> 
        <div class="note"> 
         <p> 
-          <img src="images/wizard-small.png" style="margin-right:15px; float:left" alt="Little Wizard"> 
-          The original tutorial uses association lists. Clojure does not support
-          association lists out-of-the box, instead, it comes with hash-maps
-          which we use as a mapping data structure here.
+          <img src="images/wizard-small.png" style="margin-right:15px; float:left" alt="Little Wizard"> Оригинальное
+          руководство использовало ассоциированные списки. Clojure не поддерживает ассоциированные списки напрямую,
+          вместо этого он поставляется с hash-map-ами, которые мы используем в качестве отображающей структуры данных.
         </p> 
        </div> 
        <div class="textblock"> 
          <p> 
-           Now that we have defined our world and the objects in the
-           world, the only thing left to do is describe the location
-           of the player of the game:
+           Теперь когда мы задали наш мир и объекты в мире, единственная вещь, которую осталось описать это месторасположение игрока в мире:
          </p> 
         <pre class="prettyprint lang-clojure">(def location 'living-room)</pre> 
         <p> 
-          Now let's begin making some game commands!
+          А теперь давайте создадим немного игровых команд! 
         </p> 
       </div> 
       <img src="images/drink.jpg" alt="Drinking Wizard"> 
       <hr> 
       <div class="bottom"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="syntax.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="syntax.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager current">3</span> 
@@ -140,9 +127,9 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="looking.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Defining Data...</span> 
+        <span class="pager"><a href="looking.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
+        <span class="pagertext">Определяем данные...</span> 
       </div> 
   </div> 
   </body> 
