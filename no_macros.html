@@ -2,7 +2,7 @@
    "http://www.w3.org/TR/html4/strict.dtd"> 
 <html> 
   <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <link href="css/style.css" type="text/css" rel="stylesheet"> 
     <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
     <script type="text/javascript" src="js/prettify.js"></script> 
@@ -14,8 +14,8 @@
   <body onLoad="prettyPrint()"> 
     <div class="main"> 
       <div class="top"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="spels.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -25,84 +25,63 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager current">9</span> 
-        <span class="pagertext">The Case Against...</span> 
+        <span class="pagertext">Аргументация против...</span> 
       </div> 
-      <div class="heading">The Case Against the Word "Macro"</div> 
+      <div class="heading">Аргументация против слова "Макрос"</div> 
       <div class="textblock"> 
-        <p> 
-        Part of the purpose of writing this tutorial is to
-        experiment with ways that can tackle the difficult
-        subject of <b>true macros</b> in Lisp. Often, when
-        I try to explain the concept of macros to somebody
-        who has only used other languages, I'll get a
-        response like
-        "Oh yeah! There's macros like that in C++, too!".
-        The moment this happens, it becomes very difficult
-        to explain "true macros", because of the semantic
-        load on the word "macro". After all, "true macros"
-        <i>really are</i> a lot like C++ macros, in that
-        they are a way to talk to the compiler with modified code...
+        <p> Часть цели написания этого руководства была в том, чтобы поэксперементировать со сложной темой <b>настоящих
+          макросов</b> в Lisp. Часто, когда я пытаюсь объяснить концепцию макросов кому-то, кто использовал другие
+          языки, я часто слышу в ответ что-то вроде "А, да! В С++ есть тоже такие макросы!". В этот момент очень сложно
+          объяснить, что такое "настоящие макросы", поэтому что существует сематическая нагрузка на слово "макрос". В
+          конце концов, "настоящие макросы" <i>действительно</i> очень похожи на макросы C++, в том смысле что это
+          способ общаться с компилятором при помощи измененного кода...
         </p> 
-        <p> 
-        ...so imagine if John McCarthy had used the word "add"
-        instead of "cons" to connect items to lists: It would
-        make it really difficult to explain how consing works.
+        <p> ...представьте, если бы Джон Маккартни использовал слово "add" (добавить) вместо слова "cons" (сокращенное
+        от английского "construct", создавать) для добавления элементов в список: это значительно усложнило бы
+        объяснение, как работает можно создать целое из частей.
         </p> 
-        <p> 
-        Therefore, I decided to experiment with a new term for
-        a macro in this essay: <b>SPEL</b>, which stands for
-        "<b>S</b>emantic <b>P</b>rogram <b>E</b>nhancement <b>L</b>ogic",
-        which is
-        admittedly a bit of a stretch, but the term has many benefits:
+        <p> Поэтому, я решил поэксперементировать с новым термином для макросов в этом эссэ: <b>SPEL (Спелл)</b>, что
+        означает "<b>S</b>emantic <b>P</b>rogram <b>E</b>nhancement <b>L</b>ogic" (Логика Улучшения Семантической
+        Программы), что, надо сказать, немного натянуто, но у этого термина много преимуществ:
         </p> 
      </div> 
      <div class="textblock"> 
      <ol> 
-       <li> 
-       It captures the almost magical power that Lisp macros
-       can have to change the behavior of a Lisp environment.</li> 
-       <li>The term SPEL can be used in a million different ways
-       to explain programming concepts in elegant ways, using
-       the metaphor of the <i>spell</i> and <i>casting spells</i>.
+       <li> Он фиксирует почти магическую силу, которые имеют макросы в Lisp, благодаря которой они могут изменять
+	 окружение Lisp.
+       </li>
+       <li>Термин SPEL может быть использован в миллионе различных способах объяснить концепции программирования
+       элегантным способом, например используя метафоры <i>spell</i> (заклинание, чары) и <i>casting spells</i>
+       (колдовать заклинания, накладывать чары).
        </li> 
-       <li> 
-       The term causes no confusion between true macros and other
-       types of macros.
+       <li> Термин не вызывает замешательства между настоящими макросами и другими типами макросов.
        </li> 
-       <li> 
-       The semantic load of the term "spel" is very low. A Google
-       search for "(macro OR macros) programming -lisp -scheme"
-       returned 1150000 hits. A Google search for
-       "(spel OR spels) programming -lisp -scheme"
-       returned only 28400. Even worse when you consider that
-       the search "(macro OR macros) programming (lisp OR scheme)"
-       only returned a measly 395000!
+       <li> Семантическая нагрузка на термин "spel" очень маленькая. Поиск в Google на запрос "(macro OR macros)
+       programming -lisp -scheme" возвращает 1150000 результатов. Поиск Google на запрос "(spel OR spels) programming
+       -lisp -scheme" возвращает только 28400. Что еще хуже, если принять во внимание, что поисковой запрос "(macro OR macros) programming
+       (lisp OR scheme)" возвращает только ничтожные 395000 результатов!
        </li> 
      </ol> 
    </div> 
    <div class="textblock"> 
-     <p> 
-     So I hope, as a Lisper, you'll consider supporting this new
-     term - Naturally, any new memes like this have a very low
-     likelihood of success.
+     <p> Я надеюсь, как Лиспер, что вы примете решение поддержать этот новый термин - естественно, что все новые мемы
+     как этот, имеют очень малые шансы на успех.
      </p> 
-     <p> 
-     If you have a library or are a Lisp implementation author,
-     <b>please drop everything you are doing right now and</b> 
-     add the following line to your library:
+     <p> Если вы пишете библиотеку и вы автор реализации Lisp, то <b>пожалуйста прекратите все, что вы прямо сейчас делаете и</b> 
+       добавьте следующую строчку в вашу библиотеку:
      </p> 
      <pre class="prettyprint lang-clojure"> 
 (defmacro defspel [& rest] `(defmacro ~@rest))</pre> 
      <p> 
-     There, problem solved! :)
+     Вот, проблема решена! :)
      </p> 
      <p> 
-     -- Conrad Barski, M.D.
+     -- Конрад Барски, M.D.
      </p> 
    </div> 
       <div class="bottom"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="spels.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -112,7 +91,7 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager current">9</span> 
-        <span class="pagertext">The Case Against...</span> 
+        <span class="pagertext">Аргументация против...</span> 
       </div> 
    </div> 
   </body> 
