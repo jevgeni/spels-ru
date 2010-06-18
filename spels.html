@@ -2,7 +2,7 @@
    "http://www.w3.org/TR/html4/strict.dtd"> 
 <html> 
   <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
     <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
     <script type="text/javascript" src="js/prettify.js"></script> 
@@ -12,8 +12,8 @@
   <body onLoad="prettyPrint()"> 
     <div class="main"> 
       <div class="top"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="walking.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="walking.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -23,53 +23,42 @@
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="actions.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Casting SPELs</span> 
+        <span class="pager"><a href="actions.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">назад &gt;&gt;</a></span> 
+        <span class="pagertext">Колдуем спеллы</span> 
       </div> 
-      <div class="heading">Casting SPELs</div> 
+      <div class="heading">Колдуем спеллы</div> 
       <div class="textblock"> 
-        <p> 
-        Now we're going to learn an incredibly powerful feature of
-        Lisp: Creating SPELs!
+        <p> Сейчас мы собираемся узнать о невероятно мощной возможности Lisp-а: создании спеллов!
         </p> 
-        <p> 
-        SPEL is short for "Semantic Program Enhancement Logic" and lets
-        us create new behavior inside the world of our computer code
-        that changes the Lisp language at a fundamental level in order
-        to customize its behavior for our needs- It's the part of Lisp
-        that looks most like magic. To enable SPELs, we first need to
-        activate SPELs inside our Lisp compiler (Don't worry about what
-        this line does - Advanced Lispers should click
-        <a href="no_macros.html">here.</a>)
+        <p> Спелл происходит от английского SPEL которое расшифровывается как "Semantic Program Enhancement Logic", то
+	  есть "Логика Улучшения Семантической Программы". Здесь есть еще игра слов - SPEL это урезанная версия слова
+	  SPELL, что означает в переводе "заклинание". Лисперы верят, что программа - это способ подчинить дух
+	  компьютера и заставить его выполнять определенные действия, поэтому спелл будет более подходящим вариантом
+	  перевода. Спеллы позволяют нам создавать новое поведение внутри мира нашего компьютера, которое изменяет сам
+	  язык Lisp на фундаментальном уровне, позволяя делать то, что нам требуется - именно здесь Lisp больше всего
+	  похож на магию. Чтобы использовать спеллы, мы должны сначала активировать их внутри нашего Lisp компилятора:
+	  (не беспокойтесь о том, что эта строчка кода делает, а продвинутые лисперы должны
+	  нажать <a href="no_macros.html">сюда.</a>)
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defmacro defspel [& rest] `(defmacro ~@rest))</pre> 
         <p> 
-        Ok, now that they're enabled, let's cast our first spell,
-        called <code>walk</code>:
+        Хорошо, теперь когда они включены, давайте создадим наш первый спелл, называемый <code>walk</code>:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defspel walk [direction] `(walk-direction '~direction))</pre> 
-        <p> 
-        What this code does is it tells the Lisp compiler that the
-        word <code>walk</code> is not actually the word
-        <code>walk</code> but the word <code>walk-direction</code> 
-        and that the word <code>direction</code> actually has a
-        quote in front of it, even though we can't see it. Basically
-        we can sneak in some special code inbetween our program and
-        the compiler that changes our code into something else before
-        it is compiled:
+        <p> Это код говорит компилятору Lisp что слово <code>walk</code> на самом деле не слово <code>walk</code>, а
+        слово <code>walk-direction</code> вместе со словом <code>direction</code>, перед которым добавлена одинарная
+        кавычка, хотя мы этого и не можем увидеть. По существу, мы можем вставить некий особый код внутри нашей
+        программы и компилятор заменит наш код на что-то другое, прежде чем он начнет компилировать:
         </p> 
       </div> 
       <img src="images/spel_compile.jpg" alt="Compiling a SPEL"> 
       <div class="textblock"> 
-        <p> 
-         Notice how similar this function looks to the code we had
-        written before for describe-path: In Lisp, not only do code
-        and data look a lot identical, but code and special commands
-        to the compiler (the SPELs) look identical as well - A very
-        consistent and clean design! Let's try our new spell:
+        <p> Обратите внимание как эта функция похожа на тот код, который мы написали ранее для describe-path: В Lisp, не
+         только код и данные выглядят очень похоже, но и код и специальные команды комилятору (спеллы) выглядят
+         идентично - очень последовательная и ясная модель! Давайте попробуем наш новый спелл:
         </p> 
         <pre class="prettyprint lang-clojure">(walk east)</pre> 
         <pre class="console"> 
@@ -81,9 +70,8 @@ there is a stairway going upstairs from here -
 you see a whiskey-bottle on the floor -
 you see a bucket on the floor -)
         </pre> 
-        <p>much better!</p> 
-        <p> 
-        Now we'll create a command to pickup objects in our world:
+        <p>Гораздо лучше!</p> 
+        <p> Теперь мы создадим команду чтобы подбирать объекты в нашем мире:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn pickup-object [object]
@@ -93,22 +81,18 @@ you see a bucket on the floor -)
           `(you are now carrying the ~object))
         :else '(you cannot get that.)))
         </pre> 
-        <p> 
-        This function checks to see if the object is indeed on the
-        floor of the current location - If it is, it <i>pushes</i> 
-        the new location (the player's body) onto the list
-        (<i>pushing</i> means to add a new item to the list, in a
-        way that the <i>assoc</i> command sees and therefore hides
-        the previous location) and returns a sentence letting us
-        know wether it succeeded.
+        <p> Эта функция проверяет, действительно ли объект находится на земле в том месте, где мы сейчас находимся -
+          если да, то она <i>проталкивает</i> новое место (body, тело игрока) в список (<i>проталкивать</i> означает
+          добавить новый элемент в список таким образом, что команда <i>assoc</i> замечает это и прячет предыдущее
+          место) и возвращает предложение, в котором говорится, удалось нам это или нет.
         </p> 
         <p> 
-        Now let's cast another SPEL to make the command easier to use:
+          Давайте теперь создадим очередный спелл, который позволит упростить команду:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defspel pickup [object] `(spel-print (pickup-object '~object)))</pre> 
         <p> 
-        Now let's try our new SPEL:
+          Теперь попробуем наш новый спелл:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (pickup whiskey-bottle)</pre> 
@@ -117,17 +101,15 @@ you see a bucket on the floor -)
         <pre class="console"> 
 user=> (pickup whiskey-bottle)
 (you are now carrying the whiskey-bottle)</pre> 
-        <p> 
-        Now let's add a couple more useful commands - First, a
-        command that lets us see our current inventory of items
-        we're carrying:
+        <p> Давайте теперь добавим еще пару полезных команд - сперва, команда, которая позволяет просматривать наш
+          инвентарь, то, что мы несем с собой:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn inventory []
   (filter (fn [x] (is-at? x 'body object-locations)) objects))
         </pre> 
         <p> 
-        Now a function that tells us if he have a certain object on us:
+          Теперь функцию, которая скажет нам, есть ли у нас некая вещь с собой:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defn have? [object]
@@ -136,8 +118,8 @@ user=> (pickup whiskey-bottle)
       </div> 
       <hr> 
       <div class="bottom"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="walking.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="walking.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -147,9 +129,9 @@ user=> (pickup whiskey-bottle)
         <span class="pager"><a href="actions.html">7</a></span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="actions.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Casting SPELs</span> 
+        <span class="pager"><a href="actions.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
+        <span class="pagertext">Колдуем спеллы</span> 
       </div> 
     </div> 
   </body> 
