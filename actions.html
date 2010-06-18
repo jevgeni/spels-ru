@@ -2,7 +2,7 @@
    "http://www.w3.org/TR/html4/strict.dtd"> 
 <html> 
   <head> 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-UTF-8"> 
     <link href="css/style.css" type="text/css" rel="stylesheet"> 
     <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
     <script type="text/javascript" src="js/prettify.js"></script> 
@@ -15,8 +15,8 @@
   <body onLoad="prettyPrint()"> 
     <div class="main"> 
       <div class="top"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="spels.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -26,18 +26,15 @@
         <span class="pager current">7</span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="addendum.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Creating Special Actions...</span> 
+        <span class="pager"><a href="addendum.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">конец &gt;&gt;</a></span> 
+        <span class="pagertext">Создаем специальные действия...</span> 
       </div> 
-      <div class="heading">Creating Special Actions in Our Game</div> 
+      <div class="heading">Создаем специальные действия в нашей игре</div> 
       <div class="textblock"> 
-        <p> 
-        We have only one more thing to do now and our game will
-        be complete: Add some special actions to the game that
-        the player has to do to win in the game. The first
-        command will let the player weld the chain to the bucket
-        in the attic:
+        <p> Нам осталось сделать только одну вещь и наша игра будет закончена: добавить некоторые специальные действия в
+	  игру, которые игрок должен будет выполнить, чтобы выиграть в игре. Первая команада позволит приварить цепь к
+	  ведру на чердаке: 
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (def chain-welded false)
@@ -53,17 +50,15 @@
             '(the chain is now securely welded to the bucket -))
         :else '(you cannot weld like that -)))
         </pre> 
-        <p> 
-        So first we created a new global variable that lets us
-        tell whether we've done this action already. Next, we
-        create a weld function that makes sure all the right
-        conditions are in place for welding and lets us weld.
+        <p> Сначала мы создаем глобальную переменную, которая будет хранить информацию, сделали ли мы уже это
+        действие. Дальше, мы создадим функцию weld (приварить), которая проверит, что все условия выполняют и можно
+        начать сваривать.
         </p> 
       </div> 
       <img src="images/weld.jpg" alt="Welding"> 
       <div class="textblock"> 
         <p> 
-        Let's try our new command:
+        Давайте попробуем нашу новую команду:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (weld 'chain 'bucket)</pre> 
@@ -71,11 +66,9 @@
 user=> (weld 'chain 'bucket)
 (you cannot weld like that -)</pre> 
         <p> 
-        Oops... we're don't have a bucket or chain, do we?
-        ...and there's no welding machine around... oh well...
+          Ой... у нас нет ведра или цепи, не так ли? ... и поблизости нет сварочного аппарата ... ох, ладно ...
         </p> 
-        <p> 
-        Now let's create a command for dunking the chain and bucket in the well:
+        <p> Давайте создадим команду для окунания ведра с цепью в колодец:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (def bucket-filled false)
@@ -89,18 +82,12 @@ user=> (weld 'chain 'bucket)
         (do (def bucket-filled true)
             '(the bucket is now full of water))
         :else '(you cannot dunk like that -)))</pre> 
-        <p> 
-        Now if you paid attention, you probably noticed that this
-        command looks <i>a lot</i> like the <code>weld</code> 
-        command... Both commands need to check the location,
-        subject, and object - But there's enough making them
-        different enough so that we can't combine the
-        similarities into a single function. Too bad...
+        <p> Если вы были внимательны, то возможно заметили, что команда выглядит <i>очень</i> похоже на код
+        команды <code>weld</code>... Обе команды должны проверить место, субъект и объект - но при этом достаточно
+        различий, чтобы мы не смогли объединить сходства в единую функцию. Очень жаль...
         </p> 
-        <p> 
-        ...but since this is Lisp, we can do more than just
-        write functions, we can cast SPELs! Let's create the
-        following SPEL:
+        <p> ...но так как это Lisp, то мы можем делать больше, чем просто писать функции, мы может создавать спеллы!
+        Давайте создаим следующий спелл:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (defspel game-action [command subj obj place & args]
@@ -114,31 +101,20 @@ user=> (weld 'chain 'bucket)
       </pre> 
       </div> 
       <div class="textblock"> 
-        <p> 
-        Notice how ridiculously complex this SPEL is - It has
-        more weird quotes, backquotes, commas and other weird
-        symbols than you can shake a list at. More than that
-        it is a SPEL that actually cast ANOTHER SPEL! Even experienced
-        Lisp programmers would have to put some thought into
-        create a monstrosity like this (and in fact they would
-        consider this SPEL to be inelegant and would go through
-        some extra esoteric steps to make it better-behaved
-        that we won't worry about here...)
+        <p> Обратите внимание, насколько нелепо и сложно выглядит этот спелл - в нем много таинственных одинарных
+        кавычек, обратных кавычек, запятых и других странных символов. Более того, этот спелл вызывает ДРУГОЙ СПЕЛЛ!
+        Даже опытные Lisp программисты должны были бы немного подумать, чтобы создать такое чудовище (и на самом деле
+        они сочли бы этот спелл неэлегантым, сделали бы пассы руками и приняли бы несколько нетривиальных решений, чтобы
+        сделать его более приглядным, то есть то, что мы не будем делать здесь...)
         </p> 
       </div> 
       <img src="images/game_action.jpg" alt="Game Action"> 
       <div class="textblock"> 
-        <p> 
-        The point of this SPEL is to show you just how
-        sophisticated and clever you can get with these
-        SPELs. Also, the ugliness doesn't really matter
-        much if we only have to write it once and then
-        can use it to make hundreds of commands for a
-        bigger adventure game.
+        <p> Идея этого спелла заключается в том, чтобы показать насколько изысканно и умно можно подойти к использованию
+        спеллов. Также, бозобразность на самом деле не играет особого значения, если благодаря этому мы сможем написать
+        сотни команд для большой приключенческой игры.
         </p> 
-        <p> 
-        Let's use our new SPEL to replace our ugly
-        <code>weld</code> command:
+        <p> Давайте используем наш навый спелл, чтобы заменить безобразную команду <code>weld</code>:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (game-action weld chain bucket attic
@@ -146,30 +122,24 @@ user=> (weld 'chain 'bucket)
               '(the chain is now securely welded to the bucket -)
          :else '(you do not have a bucket -)))
         </pre> 
-        <p> 
-        Look at how much easier it is to understand this
-        command - The <code>game-action</code> SPEL lets us write exactly
-        what we want to say without a lot of fat - It's almost
-        like we've created our own computer language just for
-        creating game commands. Creating your own pseudo-language
-        with SPELs is called
-        <b>Domain Specific Language Programming</b>, a very powerful
-        way to program very quickly and elegantly.
+        <p> Посмотри насколько понятнее стала команда - спелл <code>game-action</code> позволяет нам писать именно то,
+        что мы ходим сказать, без шелухи - это выглядит почти так, как будто мы создали свой собственный компьютерный
+        язык для создания игровых команд. Такой созданный при помощи спеллов псевдо-язык
+        называется <b>предметно-ориентированным языком программирования</b> и использование такого языка - очень мощный
+        способ программировать быстро и элегантно.
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (weld chain bucket)</pre> 
         <pre class="console"> 
 user=> (weld chain bucket)
 (you do not have a chain -)</pre> 
-        <p> 
-        ...we still aren't in the right situation to do any welding, but the
-        command is doing its job!
+        <p> ...мы все еще не можем ничего приварить, но команда делает свое дело!
         </p> 
       </div> 
       <img src="images/dunk.jpg" alt="Dunking"> 
       <div class="textblock"> 
         <p> 
-        Next, let's rewrite the <code>dunk</code> command as well:
+        Теперь, давайте перепишем команду <code>dunk</code>:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (game-action dunk bucket well garden
@@ -180,18 +150,15 @@ user=> (weld chain bucket)
  
  
 </pre> 
-        <p> 
-        Notice how the <code>weld</code> command had to
-        check whether we <code>have?</code> the subject,
-        but that the dunk command skips that step - Our
-        new game-action SPEL makes the code easy to write
-        and understand.
+        <p> Обратите внимание, как команда <code>weld</code> проверяет, есть ли у нас субъект с
+        помощью <code>have?</code>, а команда dunk пропускает этот шаг - наш новый спелл game-action делает код более
+        простым для написания и чтения.
         </p> 
       </div> 
       <img src="images/splash.jpg" alt="Splash"> 
       <div class="textblock"> 
         <p> 
-        And now our last code for splashing water on the wizard:
+          Теперь наша последняя часть кода для плескания воды в волшебника:
         </p> 
         <pre class="prettyprint lang-clojure"> 
 (game-action splash bucket wizard living-room
@@ -209,27 +176,21 @@ user=> (weld chain bucket)
       <img src="images/donut.jpg" alt="Getting the Donut"> 
       <div class="textblock"> 
         <p> 
-        <b>You have now written a complete text adventure game!</b> 
+        <b>Теперь у вас есть готовая текстовая приключенческая игра!</b> 
         </p> 
-        <p> 
-        Click <a href="cheat.html">HERE</a> for a complete walkthrough
-        of the game,
+        <p> Нажмите <a href="cheat.html">СЮДА</a> чтобы посмотреть прохождение игры,
         </p> 
-        <p> 
-        Click <a href="code.html">HERE</a> for a copy of the source
-        code you can copy &amp; paste into your Clojure prompt in a
-        single step.
+        <p> Нажмите <a href="code.html">СЮДА</a> для получения копии исходного кода, который вы можете выделить и
+          скопировать в консоль Clojure за один раз.
         </p> 
-        <p> 
-        In order to make this tutorial as simple as possible,
-        many details about how Lisp works have been glossed
-        or fudged over, so let's look at what those details are...
+        <p> Чтобы сделать это руководство настолько простым, насколько возможно, многие детали как Lisp работает были
+        умолчаны или упрощены, поэтому давайте посмотрим, что же это были за детали ....
         </p> 
       </div> 
       <hr> 
       <div class="bottom"> 
-        <span class="pager"><a href="casting.html">&lt;&lt; first</a></span> 
-        <span class="pager"><a href="spels.html">&lt; prev</a></span> 
+        <span class="pager"><a href="casting.html">&lt;&lt; начало</a></span> 
+        <span class="pager"><a href="spels.html">&lt; назад</a></span> 
         <span class="pager"><a href="casting.html">1</a></span> 
         <span class="pager"><a href="syntax.html">2</a></span> 
         <span class="pager"><a href="data.html">3</a></span> 
@@ -239,9 +200,9 @@ user=> (weld chain bucket)
         <span class="pager current">7</span> 
         <span class="pager"><a href="addendum.html">8</a></span> 
         <span class="pager"><a href="no_macros.html">9</a></span> 
-        <span class="pager"><a href="addendum.html">next &gt;</a></span> 
-        <span class="pager"><a href="no_macros.html">last &gt;&gt;</a></span> 
-        <span class="pagertext">Creating Special Actions...</span> 
+        <span class="pager"><a href="addendum.html">вперед &gt;</a></span> 
+        <span class="pager"><a href="no_macros.html">назад &gt;&gt;</a></span> 
+        <span class="pagertext">Создаем специальные действия...</span> 
       </div> 
     </div> 
   </body> 
