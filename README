@@ -2,3 +2,16 @@ This is a translation of Clojure version of lisperati.com tutorial.
 
 This repository also contains gimp images which have "clean" layers and can be used as the basis for translation to
 other languages.
+
+Термины:
+|----------------------------+----------------------------|
+| Tutorial                   | Руководство                |
+| SPEL                       | Спелл                      |
+| next                       | вперед                     |
+| prev                       | назад                      |
+| first                      | первая                     |
+| last                       | последняя                  |
+| Casting SPELs with Clojure | Волшебство и Магия Clojure |
+|----------------------------+----------------------------|
+
+Сходства и различия магии и волшебства: http://mylovealtar.com/jupiter/category/21/message/138.php

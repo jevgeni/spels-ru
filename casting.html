@@ -7,7 +7,7 @@
     <link href="css/prettify.css" type="text/css" rel="stylesheet"> 
     <script type="text/javascript" src="js/prettify.js"></script> 
     <script type="text/javascript" src="js/lang-clojure.js"></script> 
-    <title>Casting SPELs with Clojure - Home -</title> 
+    <title>Волшебство и Магия Clojure - Вступление -</title> 
     <style type="text/css"> 
     .linkcell {
        background-color: #eeffee;
@@ -33,23 +33,23 @@
       <span class="pager"><a href="actions.html">7</a></span> 
       <span class="pager"><a href="addendum.html">8</a></span> 
       <span class="pager"><a href="no_macros.html">9</a></span> 
-      <span class="pager"><a href="syntax.html">Вперед &gt;</a></span> 
-      <span class="pager"><a href="no_macros.html">Конец &gt;&gt;</a></span> 
-      <span class="pagertext">Заглавие</span> 
+      <span class="pager"><a href="syntax.html">вперед &gt;</a></span> 
+      <span class="pager"><a href="no_macros.html">последняя &gt;&gt;</a></span> 
+      <span class="pagertext">Вступление</span> 
     </div> 
     <div class="title"> 
       <div style="background-color: #9afffb;"> 
-        Вы когда-нибудь интересовались, что же делает Lisp таким мощным?<br> 
-        Теперь вы можете выяснить это сами - <br> 
+        Вы когда-нибудь хотели узнать, что именно делает Lisp таким мощным?<br> 
+        Теперь это можно выяснить это самостоятельно - <br> 
       </div> 
-      <img src="images/casting_spels.jpg" alt="Cover image"> 
+      <img src="images/casting_spels.jpg" alt="Обложка"> 
       <div style="background-color: #b8ff97">
         <b>Комикс</b><br>
-        By <a href="mailto:lisperati@gmail.com">Conrad Barski, M.D.</a>,
-        lisperati.com<br> 
-        Clojure Version by Wei-Ju Wu<br>
-        licensed under the <a href="http://www.gnu.org/licenses/fdl.txt"> 
-        GNU Free Documentation License 1.2</a><br> 
+        <a href="mailto:lisperati@gmail.com">Конрад Барски (Conrad Barski), M.D.</a>,
+        <a href="http://www.lisperati.com">lisperati.com</a><br/> 
+        Версия Clojure - Вей-Джу Ву (Wei-Ju Wu)<br/>
+	Перевод - Евгений Холодков (Jevgeni Holodkov)<br/>
+        Лицензия - <a href="http://www.gnu.org/licenses/fdl.txt">Свободная документация GNU, Версия 1.2</a><br> 
         <table cellspacing="10"> 
           <tbody><tr> 
             <td class="linkcell"><a href="http://www.lisperati.com/casting.html">Оригинальная версия</a></td> 
@@ -63,26 +63,26 @@
     </div> 
     </div> 
     <div class="textblock"> 
-      <p> Любой, кто когда-либо учился программировать на Lisp, скажет вам, что Lisp очень сильно отличается от любых
+      <p> Любой, кто когда-либо учился программировать на Lisp, подтвердит, что Lisp очень сильно отличается от любых
         других языков программирования. Он отличается в очень неожиданных местах - этот комикс поможет вам понять как
         именно уникальный дизайн Lisp-а делает его таким мощным!</p> 
       <p> Этот руководство было адаптировано под Clojure, новый захватывающий диалект Lisp, который запускается под
-        виртуальной машиной Java. Синтаксис и API Clojure имеет сходство с Common Lisp-ом, но в нем достаточно различий,
-        чтобы написать отдельную версию этой книги.</p>
-      <p>Чаще всего мы будем говорить "Lisp" вместо "Clojure", потому что большая часть представленных концепций
-	применима к Lisp-у в целом - мы будем указывать те места, где Clojure работает немного иначе.</p>
+        виртуальной машиной Java. Синтаксис и API Clojure имеет сходство с диалектом Common Lisp, но в нем достаточно
+        различий, чтобы написать отдельную версию этой книги.</p>
+      <p>Чаще всего мы будем говорить "Lisp", вместо "Clojure", потому что большая часть представленных концепций
+	применима к Lisp-у в целом. Там, где Clojure работает немного иначе, мы будем указывать отдельно.</p>
     </div> 
-    <img src="images/different.jpg" alt="Lisp is different"> 
+    <img src="images/different.jpg" alt="Lisp - особенный"> 
     <div class="textblock"> 
       <p>Так как Clojure работает под JVM, вам потребуется установленная на вашем компьютере Java. Если у вас Mac, то
 	Java уже установлена. Если у вас Linux или Windows, то вы можете скачать Java с
-	<a href="http://java.sun.com/javase/downloads/index.jsp">Oracle Java веб-страницы</a>. Вы можете скачать самую
+	<a href="http://java.sun.com/javase/downloads/index.jsp">веб-страницы Oracle Java</a>. Вы можете скачать самую
 	последнюю версию Clojure с <a href="http://clojure.org">его веб-страницы</a>.</p>
         <p> Для использования примеров в этом руководстве просто распакуйте архив, откройте командную строку и перейдите
-	  в главную директорию Clojure. Затем введите:
+	  в главный каталог Clojure. Затем введите:
 	</p>
         <pre class="prettyprint">java -jar clojure.jar</pre> 
-	Если все работает корректно, то вы должны увидеть Clojure консоль, которая выглядит примерно так:
+	Если все установлено корректно, то вы должны увидеть Clojure консоль, которая выглядит примерно так:
         <pre class="console"> 
 Clojure 1.1.0
 user=>
@@ -90,7 +90,7 @@ user=>
       <p>Это руководство содержит небольшие примеры Clojure кода, написанные в:</p> 
       <pre class="prettyprint lang-clojure">'(такого рода блоках)</pre> 
       <p> ...Просто скопируйте эти фрагменты кода в консоль Clojure (далее - REPL, от английского read-eval-print-loop,
-	цикл-чтения-выполнения-отображения) и к тому времени, как руководство будет пройдено, у вас будет 
+	цикл-чтения-выполнения-отображения) и к тому времени, как руководство будет прочитано, у вас будет
       <b>своя собственная текстовая приключенческая игра !</b></p> 
     </div> 
     <hr> 
@@ -108,9 +108,9 @@ user=>
       <span class="pager"><a href="actions.html">7</a></span> 
       <span class="pager"><a href="addendum.html">8</a></span> 
       <span class="pager"><a href="no_macros.html">9</a></span> 
-      <span class="pager"><a href="syntax.html">Вперед &gt;</a></span> 
-      <span class="pager"><a href="no_macros.html">Конец &gt;&gt;</a></span> 
-      <span class="pagertext">Заглавие</span> 
+      <span class="pager"><a href="syntax.html">вперед &gt;</a></span> 
+      <span class="pager"><a href="no_macros.html">последняя &gt;&gt;</a></span> 
+      <span class="pagertext">Вступление</span> 
     </div> 
 </div> 
 </body> 
