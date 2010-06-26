@@ -73,7 +73,7 @@
           в этом руководстве, просто копируйте в консоль Clojure: 
         </p> 
         <pre class="prettyprint lang-clojure">(describe-location 'living-room game-map)</pre> 
-        <pre class="console"> 
+        <pre class="console">
  user=&gt; (describe-location 'living-room game-map)
  (you are in the living-room of a wizard's house -
  there is a wizard snoring loudly on the couch -)</pre> 
@@ -215,7 +215,7 @@ true</pre>
         <p> 
           Теперь давайте используем эту функцию чтобы описать то, что находится на земле в указанном месте:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (defn describe-floor [loc objs obj-loc]
   (apply concat (map (fn [x]
                        `(you see a ~x on the floor -))

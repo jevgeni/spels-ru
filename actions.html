@@ -33,7 +33,7 @@
 	  игру, которые игрок должен будет выполнить, чтобы выиграть в игре. Первая команада позволит приварить цепь к
 	  ведру на чердаке: 
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (def chain-welded false)
  
 (defn weld [subject object]
@@ -45,8 +45,7 @@
              (not chain-welded))
         (do (def chain-welded true)
             '(the chain is now securely welded to the bucket -))
-        :else '(you cannot weld like that -)))
-        </pre> 
+        :else '(you cannot weld like that -)))</pre> 
         <p> Сначала мы создаем глобальную переменную, которая будет хранить информацию, сделали ли мы уже это
         действие. Дальше, мы создадим функцию weld (приварить), которая проверит, что все условия выполняют и можно
         начать сваривать.
@@ -57,18 +56,15 @@
         <p> 
         Давайте попробуем нашу новую команду:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(weld 'chain 'bucket)</pre> 
-        <pre class="console"> 
-user=> (weld 'chain 'bucket)
+        <pre class="prettyprint lang-clojure">(weld 'chain 'bucket)</pre> 
+        <pre class="console">user=> (weld 'chain 'bucket)
 (you cannot weld like that -)</pre> 
         <p> 
           Ой... у нас нет ведра или цепи, не так ли? ... и поблизости нет сварочного аппарата ... ох, ладно ...
         </p> 
         <p> Давайте создадим команду для окунания ведра с цепью в колодец:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(def bucket-filled false)
+        <pre class="prettyprint lang-clojure">(def bucket-filled false)
  
 (defn dunk [subject object]
   (cond (and (= location 'garden)
@@ -86,7 +82,7 @@ user=> (weld 'chain 'bucket)
         <p> ...но так как это Lisp, то мы можем делать больше, чем просто писать функции, мы может создавать спеллы!
         Давайте создаим следующий спелл:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (defspel game-action [command subj obj place & args]
   `(defspel ~command [subject# object#]
      `(spel-print (cond (and (= location '~'~place)
@@ -94,8 +90,7 @@ user=> (weld 'chain 'bucket)
                              (= '~object# '~'~obj)
                              (have? '~'~subj))
                         ~@'~args
-                        :else '(i cannot ~'~command like that -)))))
-      </pre> 
+                        :else '(i cannot ~'~command like that -)))))</pre> 
       </div> 
       <div class="textblock"> 
         <p> Обратите внимание, насколько нелепо и сложно выглядит этот спелл - в нем много таинственных одинарных
@@ -113,22 +108,18 @@ user=> (weld 'chain 'bucket)
         </p> 
         <p> Давайте используем наш навый спелл, чтобы заменить безобразную команду <code>weld</code>:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(game-action weld chain bucket attic
+        <pre class="prettyprint lang-clojure">(game-action weld chain bucket attic
    (cond (and (have? 'bucket) (def chain-welded true))
               '(the chain is now securely welded to the bucket -)
-         :else '(you do not have a bucket -)))
-        </pre> 
+         :else '(you do not have a bucket -)))</pre> 
         <p> Посмотри насколько понятнее стала команда - спелл <code>game-action</code> позволяет нам писать именно то,
         что мы ходим сказать, без шелухи - это выглядит почти так, как будто мы создали свой собственный компьютерный
         язык для создания игровых команд. Такой созданный при помощи спеллов псевдо-язык
         называется <b>предметно-ориентированным языком программирования</b> и использование такого языка - очень мощный
         способ программировать быстро и элегантно.
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(weld chain bucket)</pre> 
-        <pre class="console"> 
-user=> (weld chain bucket)
+        <pre class="prettyprint lang-clojure">(weld chain bucket)</pre> 
+        <pre class="console">user=> (weld chain bucket)
 (you do not have a chain -)</pre> 
         <p> ...мы все еще не можем ничего приварить, но команда делает свое дело!
         </p> 
@@ -138,15 +129,12 @@ user=> (weld chain bucket)
         <p> 
         Теперь, давайте перепишем команду <code>dunk</code>:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (game-action dunk bucket well garden
              (cond chain-welded 
                    (do (def bucket-filled true)
                        '(the bucket is now full of water))
-                   :else '(the water level is too low to reach -)))
- 
- 
-</pre> 
+                   :else '(the water level is too low to reach -)))</pre> 
         <p> Обратите внимание, как команда <code>weld</code> проверяет, есть ли у нас субъект с
         помощью <code>have?</code>, а команда dunk пропускает этот шаг - наш новый спелл game-action делает код более
         простым для написания и чтения.
@@ -157,7 +145,7 @@ user=> (weld chain bucket)
         <p> 
           Теперь наша последняя часть кода для плескания воды в волшебника:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (game-action splash bucket wizard living-room
              (cond (not bucket-filled) '(the bucket has nothing in it -)
                    (have? 'frog) '(the wizard awakens and sees that you stole
@@ -167,8 +155,7 @@ user=> (weld chain bucket)
                    :else '(the wizard awakens from his slumber and greets you
                                warmly -
                                he hands you the magic low-carb donut - you win!
-                               the end -)))
-      </pre> 
+                               the end -)))</pre> 
       </div> 
       <img src="images/donut.jpg" alt="Getting the Donut"> 
       <div class="textblock"> 

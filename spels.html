@@ -41,13 +41,11 @@
 	  (не беспокойтесь о том, что эта строчка кода делает, а продвинутые лисперы должны
 	  нажать <a href="no_macros.html">сюда.</a>)
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(defmacro defspel [& rest] `(defmacro ~@rest))</pre> 
+        <pre class="prettyprint lang-clojure">(defmacro defspel [& rest] `(defmacro ~@rest))</pre> 
         <p> 
         Хорошо, теперь когда они включены, давайте создадим наш первый спелл, называемый <code>walk</code>:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(defspel walk [direction] `(walk-direction '~direction))</pre> 
+        <pre class="prettyprint lang-clojure">(defspel walk [direction] `(walk-direction '~direction))</pre> 
         <p> Это код говорит компилятору Lisp что слово <code>walk</code> на самом деле не слово <code>walk</code>, а
         слово <code>walk-direction</code> вместе со словом <code>direction</code>, перед которым добавлена одинарная
         кавычка, хотя мы этого и не можем увидеть. По существу, мы можем вставить некий особый код внутри нашей
@@ -61,26 +59,24 @@
          идентично - очень последовательная и ясная модель! Давайте попробуем наш новый спелл:
         </p> 
         <pre class="prettyprint lang-clojure">(walk east)</pre> 
-        <pre class="console"> 
+        <pre class="console">
 user=> (walk east)                                             
 (you are in the living room of a wizards house -
 there is a wizard snoring loudly on the couch -
 there is a door going west from here -
 there is a stairway going upstairs from here -
 you see a whiskey-bottle on the floor -
-you see a bucket on the floor -)
-        </pre> 
+you see a bucket on the floor -)</pre> 
         <p>Гораздо лучше!</p> 
         <p> Теперь мы создадим команду чтобы подбирать объекты в нашем мире:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (defn pickup-object [object]
   (cond (is-at? object location object-locations)
         (do
           (def object-locations (assoc object-locations object 'body))
           `(you are now carrying the ~object))
-        :else '(you cannot get that.)))
-        </pre> 
+        :else '(you cannot get that.)))</pre> 
         <p> Эта функция проверяет, действительно ли объект находится на земле в том месте, где мы сейчас находимся -
           если да, то она <i>проталкивает</i> новое место (body, тело игрока) в список (<i>проталкивать</i> означает
           добавить новый элемент в список таким образом, что команда <i>assoc</i> замечает это и прячет предыдущее
@@ -89,32 +85,27 @@ you see a bucket on the floor -)
         <p> 
           Давайте теперь создадим очередный спелл, который позволит упростить команду:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(defspel pickup [object] `(spel-print (pickup-object '~object)))</pre> 
+        <pre class="prettyprint lang-clojure">(defspel pickup [object] `(spel-print (pickup-object '~object)))</pre> 
         <p> 
           Теперь попробуем наш новый спелл:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
-(pickup whiskey-bottle)</pre> 
+        <pre class="prettyprint lang-clojure">(pickup whiskey-bottle)</pre> 
       </div> 
       <div class="textblock"> 
-        <pre class="console"> 
-user=> (pickup whiskey-bottle)
+        <pre class="console">user=> (pickup whiskey-bottle)
 (you are now carrying the whiskey-bottle)</pre> 
         <p> Давайте теперь добавим еще пару полезных команд - сперва, команда, которая позволяет просматривать наш
           инвентарь, то, что мы несем с собой:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (defn inventory []
-  (filter (fn [x] (is-at? x 'body object-locations)) objects))
-        </pre> 
+  (filter (fn [x] (is-at? x 'body object-locations)) objects))</pre> 
         <p> 
           Теперь функцию, которая скажет нам, есть ли у нас некая вещь с собой:
         </p> 
-        <pre class="prettyprint lang-clojure"> 
+        <pre class="prettyprint lang-clojure">
 (defn have? [object]
-   (some #{object} (inventory)))
-        </pre> 
+   (some #{object} (inventory)))</pre> 
       </div> 
       <hr> 
       <div class="bottom"> 
